@@ -16,5 +16,10 @@ To remove an environment in your terminal window run:
 
 ```bash
 conda remove --name myenv --all
+```
 
+To list all environment run:
 
+```bash
+conda env list
+```

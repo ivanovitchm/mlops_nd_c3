@@ -112,4 +112,4 @@ To track the changes with git, run:
 git add dvc.yaml pipeline/01_data/.gitignore dvc.lock
 ```
 
-If everything is successful, new DVC files and artifact are generated in the repository. ``dvc.lock`` and ``dvc.yaml`` are DVC`s files used to manage the pipeline. Additionally, a new artifact named ``preprocessing_data.csv`` must be placed at ``pipeline/01_data``.
+If everything is successful, new DVC files and a new artifact are generated in the repository. ``dvc.lock`` and ``dvc.yaml`` are  used to manage the pipeline whereas the clean data, ``preprocessing_data.csv``, must be placed at ``pipeline/01_data``.

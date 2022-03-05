@@ -42,7 +42,7 @@ and track and version the file ``census.csv`` using:
 
 ```bash
 dvc add pipeline/01_data/census.csv
-git add pipeline/01_data/census.csv.dvc pipeline/01_data/.gitignore
+git add pipeline/01_data/.gitignore pipeline/01_data/census.csv.dvc
 ```
 
 ### Exploratory Data Analysis (EDA)

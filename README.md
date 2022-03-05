@@ -42,5 +42,5 @@ We need to track and version the dataset used in the project (``census.csv``) be
 
 ```bash
 dvc add pipeline/data/census.csv
-git .....
+git add pipeline/01_data/census.csv.dvc pipeline/02_eda/EDA.ipynb.dvc pipeline/02_eda/.gitignore pipeline/01_data/.gitignore
 ```

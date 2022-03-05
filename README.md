@@ -113,3 +113,10 @@ git add dvc.yaml pipeline/01_data/.gitignore dvc.lock
 ```
 
 If everything is successful, new DVC files and a new artifact are generated in the repository. ``dvc.lock`` and ``dvc.yaml`` are  used to manage the pipeline whereas the clean data, ``preprocessing_data.csv``, must be placed at ``pipeline/01_data``.
+
+Now, given the data and pipeline are up to date is time to update the remote repository, please run:
+
+```bash
+dvc push --remote s3remote    
+```
+

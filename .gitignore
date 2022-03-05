@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/census.csv
+/EDA.ipynb
+/raw_data.csv
+
+# MacOS
+.DS_Store

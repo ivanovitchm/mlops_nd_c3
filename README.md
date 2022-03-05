@@ -105,3 +105,11 @@ dvc run -n preprocess \
         python pipeline/03_preprocess/run.py --input_artifact_name pipeline/01_data/census.csv \
                                              --output_artifact_name pipeline/01_data/preprocessing_data.csv
 ```
+
+To track the changes with git, run:
+
+```bash
+git add dvc.yaml pipeline/01_data/.gitignore dvc.lock
+```
+
+If everything is successful, new DVC files and artifact are generated in the repository. ``dvc.lock`` and ``dvc.yaml`` are DVC`s files used to manage the pipeline. Additionally, a new artifact named ``preprocessing_data.csv`` must be placed at ``pipeline/01_data``.

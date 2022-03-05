@@ -1,0 +1,9 @@
+stages:
+  preprocess:
+    cmd: python pipeline/03_preprocess/run.py --input_artifact_name pipeline/01_data/census.csv
+      --output_artifact_name pipeline/01_data/preprocessing_data.csv
+    deps:
+    - pipeline/01_data/census.csv
+    - pipeline/03_preprocess/run.py
+    outs:
+    - pipeline/01_data/preprocessing_data.csv

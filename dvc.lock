@@ -1,0 +1,16 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python pipeline/03_preprocess/run.py --input_artifact_name pipeline/01_data/census.csv
+      --output_artifact_name pipeline/01_data/preprocessing_data.csv
+    deps:
+    - path: pipeline/01_data/census.csv
+      md5: 145de00f6e6053d3f7044628f9a5b5ff
+      size: 3974474
+    - path: pipeline/03_preprocess/run.py
+      md5: a2a3c2a5f9fbb10025b6c750d042f251
+      size: 2448
+    outs:
+    - path: pipeline/01_data/preprocessing_data.csv
+      md5: 4309856f7edb21206b5193724ff484b0
+      size: 3515984

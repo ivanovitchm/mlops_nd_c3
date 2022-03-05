@@ -28,6 +28,8 @@ conda env list
 
 We will use DVC to manage and version the data processes that produce our final artifact. This mechanism allows you to organize the project better and reproduce your workflow/pipeline and results more quickly. The following steps are considered: a) ``data``, b) ``eda``, c) ``preprocess``, d) ``check data``, e) ``segregate``, f) ``train`` and g) ``evaluate``.
 
+<center><img width="600" src="https://drive.google.com/uc?export=view&id=1a-nyAPNPiVh-Xb2Pu2t2p-BhSvHJS0pO"></center>
+
 ### Data
 
 It is assumed the data has already been fetched and stored at ``pipeline/01_data``.
@@ -63,7 +65,7 @@ It is possible tracking data remotely with DVC. In this project we will use a ``
     aws configure
     ```
 
-Right after this setup, add the S3 remote bucket using:
+Right after this setup, add the ``S3 remote bucket`` using:
 
 ```bash
 dvc remote add name_of_remote_repo s3://name_of_s3_bucket

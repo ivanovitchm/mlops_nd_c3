@@ -45,7 +45,7 @@ dvc add pipeline/01_data/census.csv
 git add pipeline/01_data/.gitignore pipeline/01_data/census.csv.dvc
 ```
 
-It is possible tracking data remotely with DVC. In this project we will use a S3 bucket as configuration. Some aditional steps are necessary to setup the CLI environment. 
+It is possible tracking data remotely with DVC. In this project we will use a ``S3 bucket`` as configuration. Some aditional steps are necessary to setup the CLI environment. 
 
 1. Install the [AWS CLI tool](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
 2. Sign in [AWS Amazon](https://aws.amazon.com/) using your user and password. 
@@ -62,6 +62,24 @@ It is possible tracking data remotely with DVC. In this project we will use a S3
     ```bash
     aws configure
     ```
+
+Right after this setup, add the S3 remote bucket using:
+
+```bash
+dvc remote add name_of_remote_repo s3://name_of_s3_bucket
+```
+
+In our case, the configuration was:
+
+```bash
+dvc remote add s3remote s3://incomes3
+```
+
+To visualize the configuration run:
+
+```bash
+dvc remote list
+```
 
 ### Exploratory Data Analysis (EDA)
 

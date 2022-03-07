@@ -135,12 +135,12 @@ The scope of the ``fixture`` can have a few legal values, described [here](https
 
 ```bash
 dvc run -n datacheck \
-        -p data.reference_dataset,data.ks_alpha
+        -p data.reference_dataset,data.ks_alpha \
         -d pipeline/04_check_data/conftest.py \
         -d pipeline/04_check_data/test_data.py \
         -d pipeline/01_data/preprocessing_data.csv \
         pytest pipeline/04_check_data -s -vv --sample_artifact pipeline/01_data/preprocessing_data.csv \
-                                             --param param.yaml
+                                             --param params.yaml
 
 git add dvc.yaml dvc.lock
 ```

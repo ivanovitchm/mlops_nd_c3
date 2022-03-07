@@ -8,9 +8,9 @@ import pandas as pd
 import scipy.stats
 
 # Non Deterministic Test
-def test_kolmogorov_smirnov(data, ks_alpha):
+def test_kolmogorov_smirnov(data):
 
-    sample1, sample2 = data
+    sample1, sample2, ks_alpha = data
 
     numerical_columns = [
         "age",
@@ -43,8 +43,8 @@ def test_kolmogorov_smirnov(data, ks_alpha):
 # Determinstic Test
 def test_column_presence_and_type(data):
     
-    # Disregard the reference dataset
-    _, df = data
+    # Disregard the reference dataset and ks_alpha param
+    df, _, _ = data
 
     required_columns = {
         "age": pd.api.types.is_int64_dtype,
@@ -74,8 +74,8 @@ def test_column_presence_and_type(data):
 # Deterministic Test
 def test_class_names(data):
     
-    # Disregard the reference dataset
-    _, df = data
+    # Disregard the reference dataset and ks_alpha param
+    df, _, _ = data
 
     # Check that only the known classes are present
     known_classes = [
@@ -88,8 +88,8 @@ def test_class_names(data):
 # Deterministic Test
 def test_column_ranges(data):
     
-    # Disregard the reference dataset
-    _, df = data
+    # Disregard the reference dataset and ks_alpha
+    df, _, _ = data
 
     ranges = {
         "age": (17, 90),

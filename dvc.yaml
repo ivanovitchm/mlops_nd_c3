@@ -8,9 +8,12 @@ stages:
     outs:
     - pipeline/01_data/preprocessing_data.csv
   datacheck:
-    cmd: pytest pipeline/04_check_data -s -vv --reference_artifact pipeline/01_data/preprocessing_data.csv
-      --sample_artifact pipeline/01_data/preprocessing_data.csv --ks_alpha 0.05
+    cmd: pytest pipeline/04_check_data -s -vv --sample_artifact pipeline/01_data/preprocessing_data.csv
+      --param params.yaml
     deps:
     - pipeline/01_data/preprocessing_data.csv
     - pipeline/04_check_data/conftest.py
     - pipeline/04_check_data/test_data.py
+    params:
+    - data.ks_alpha
+    - data.reference_dataset

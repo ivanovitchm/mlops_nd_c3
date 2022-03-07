@@ -141,6 +141,8 @@ dvc run -n datacheck \
         pytest pipeline/04_check_data -s -vv --reference_artifact pipeline/01_data/preprocessing_data.csv \
                                              --sample_artifact pipeline/01_data/preprocessing_data.csv \
                                              --ks_alpha 0.05
+
+git add dvc.yaml dvc.lock
 ```
 
 

@@ -7,3 +7,10 @@ stages:
     - pipeline/03_preprocess/run.py
     outs:
     - pipeline/01_data/preprocessing_data.csv
+  datacheck:
+    cmd: pytest pipeline/04_check_data -s -vv --reference_artifact pipeline/01_data/preprocessing_data.csv
+      --sample_artifact pipeline/01_data/preprocessing_data.csv --ks_alpha 0.05
+    deps:
+    - pipeline/01_data/preprocessing_data.csv
+    - pipeline/04_check_data/conftest.py
+    - pipeline/04_check_data/test_data.py

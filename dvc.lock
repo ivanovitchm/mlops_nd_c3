@@ -14,3 +14,16 @@ stages:
     - path: pipeline/01_data/preprocessing_data.csv
       md5: 4309856f7edb21206b5193724ff484b0
       size: 3515984
+  datacheck:
+    cmd: pytest pipeline/04_check_data -s -vv --reference_artifact pipeline/01_data/preprocessing_data.csv
+      --sample_artifact pipeline/01_data/preprocessing_data.csv --ks_alpha 0.05
+    deps:
+    - path: pipeline/01_data/preprocessing_data.csv
+      md5: 4309856f7edb21206b5193724ff484b0
+      size: 3515984
+    - path: pipeline/04_check_data/conftest.py
+      md5: 2206b215ba56cf646914f54b0355f59f
+      size: 1109
+    - path: pipeline/04_check_data/test_data.py
+      md5: 1607172217148a55d980e9d04af51af0
+      size: 3441

@@ -133,4 +133,15 @@ All tests will be implemented using the ``pytest``. An important aspect when usi
 
 The scope of the ``fixture`` can have a few legal values, described [here](https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes). We are going to consider only ``session`` but it possible to use ``function``. In the former, the fixture is executed only once in a pytest session and the value it returns is used for all the tests that need it; with the latter, every test function gets a fresh copy of the data. This is useful if the tests modify the input in a way that make the other tests fail, for example. Let's see this more closely run this DVC pipeline:
 
+```bash
+dvc run -n datacheck \
+        -d pipeline/04_check_data/conftest.py \
+        -d pipeline/04_check_data/test_data.py \
+        -d pipeline/01_data/preprocessing_data.csv \
+        pytest pipeline/04_check_data -s -vv --reference_artifact pipeline/01_data/preprocessing_data.csv \
+                                             --sample_artifact pipeline/01_data/preprocessing_data.csv \
+                                             --ks_alpha 0.05
+```
+
+
 

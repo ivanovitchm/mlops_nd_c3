@@ -120,3 +120,17 @@ Now, given the data and pipeline are up to date is time to update the remote rep
 dvc push --remote s3remote    
 ```
 
+### Check Data
+
+In this stage of the pipeline we will apply ``deterministic`` and ``non-deterministic`` tests to the ``preprocessing_data.csv``.
+
+For most of the ``non-deterministic`` tests you need a reference dataset, and a dataset to be tested. This is useful when retraining, to make sure that the new training dataset has a similar distribution to the original dataset and therefore the method that was used originally is expected to work well.
+
+We will use the [Kolmogorov-Smirnov](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html) test for goodness of fit. Remember that the 2 sample KS test is used to test whether two vectors come from the same distribution (null hypothesis), or from two different distributions (alternative hypothesis), and it is non-parametric.
+
+
+All tests will be implemented using the ``pytest``. An important aspect when using ``pytest`` is understanding the ``fixture's scope`` works.
+
+The scope of the ``fixture`` can have a few legal values, described [here](https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes). We are going to consider only ``session`` and ``function``: with the former, the fixture is executed only once in a pytest session and the value it returns is used for all the tests that need it; with the latter, every test function gets a fresh copy of the data. This is useful if the tests modify the input in a way that make the other tests fail, for example. Let's see this more closely run this DVC pipeline:
+
+

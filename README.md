@@ -145,5 +145,13 @@ dvc run -n datacheck \
 git add dvc.yaml dvc.lock
 ```
 
+Now is time to update the remote repository, please run:
+
+```bash
+dvc push --remote s3remote
+```
+
+
+
 
 

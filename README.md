@@ -141,10 +141,15 @@ dvc run -n datacheck \
         -d pipeline/01_data/preprocessing_data.csv \
         pytest pipeline/04_check_data -s -vv --sample_artifact pipeline/01_data/preprocessing_data.csv \
                                              --param params.yaml
-
+                                             
 git add dvc.yaml dvc.lock
 ```
 
+To update the remote repository, please run:
+
+```bash
+dvc push --remote s3remote    
+```
 
 
 

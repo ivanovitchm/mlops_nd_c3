@@ -84,6 +84,26 @@ def test_class_names(data):
     ]
 
     assert df["salary"].isin(known_classes).all()
+    
+# Deterministic Test
+def test_zero_duplicated_rows(data):
+    
+    # Disregard the reference dataset and ks_alpha param
+    df, _, _ = data
+    
+    duplicated = df.duplicated().sum()
+    
+    assert duplicated == 0
+    
+# Deterministic Test
+def test_cardinality(data):
+    # Disregard the reference dataset and ks_alpha param
+    df, _, _ = data
+    
+    cardinality = df.select_dtypes("object").apply(lambda x: len(x.unique())).to_list()
+    reference_cardinality = [9, 16, 7, 15, 6, 5, 2, 42, 2]
+    
+    assert cardinality == reference_cardinality
 
 # Deterministic Test
 def test_column_ranges(data):

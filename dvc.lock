@@ -25,8 +25,8 @@ stages:
       md5: 94398d0fd7cc4b672c149fa874285921
       size: 1312
     - path: pipeline/04_check_data/test_data.py
-      md5: c58c75d0ccb4d0607d95d644330de4d9
-      size: 3501
+      md5: ac83c844dc41b60d20d6cc91c6ef4d92
+      size: 4058
     params:
       params.yaml:
         data.ks_alpha: 0.05

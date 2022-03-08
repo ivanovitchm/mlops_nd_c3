@@ -36,6 +36,7 @@ stages:
     deps:
     - pipeline/01_data/train_data.csv
     - pipeline/06_train/run.py
+    - pipeline/06_train/transformer_feature.py
     params:
     - data.stratify
     - data.val_size

@@ -61,8 +61,11 @@ stages:
       md5: 41bf494a1a72935d10542c743ce8b06a
       size: 2461705
     - path: pipeline/06_train/run.py
-      md5: 15e2a15e584667137cd837f760622062
-      size: 11826
+      md5: eb56ed4f4e28580891b4da2120883012
+      size: 7877
+    - path: pipeline/06_train/transformer_feature.py
+      md5: dab0858a0c0a03d0d0799c5d5922a00e
+      size: 4438
     params:
       params.yaml:
         data.stratify: salary
@@ -71,5 +74,5 @@ stages:
         train.export_artifact: pipeline/01_data/model_export
     outs:
     - path: pipeline/01_data/model_export
-      md5: 5206e6b51d3753eae8126a6e5e71e39a
-      size: 77456
+      md5: 3226069b476bad26b20ec89ae0726327
+      size: 77467

@@ -182,6 +182,7 @@ dvc run -n train \
         -p train.export_artifact,data.val_size,data.stratify,main.random_seed \
         -d pipeline/01_data/train_data.csv \
         -d pipeline/06_train/run.py \
+        -d pipeline/06_train/transformer_feature.py \
         -o pipeline/01_data/model_export \
         python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
                                         --param params.yaml

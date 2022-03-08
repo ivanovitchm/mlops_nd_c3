@@ -20,27 +20,12 @@ import argparse
 import logging
 import yaml
 from yaml import CLoader as Loader
-import joblib
-
-from transformer_feature import FeatureSelector, CategoricalTransformer, NumericalTransformer
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import LocalOutlierFactor
-
 from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
-
-from sklearn.pipeline import Pipeline, FeatureUnion
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import plot_confusion_matrix
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.metrics import accuracy_score
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.impute import SimpleImputer
+from helper import generate_pipeline, inference, compute_model_metrics, save_artifact
 
 # configure logging
 logging.basicConfig(level=logging.INFO,
@@ -49,7 +34,6 @@ logging.basicConfig(level=logging.INFO,
 
 # reference for a logging obj
 logger = logging.getLogger()
-
 
 def process_args(args):
     """
@@ -70,10 +54,11 @@ def process_args(args):
     # read all parameters
     val_size = float(params["data"]["val_size"])
     random_state = int(params["main"]["random_seed"])
-    stratify= params["data"]["stratify"]
-    export_artifact= params["train"]["export_artifact"]
-    numerical_model= params["train"]["numerical_pipe"]["model"]
+    stratify = params["data"]["stratify"]
+    export_artifact = params["train"]["export_artifact"]
+    numerical_model = params["train"]["numerical_pipe"]["model"]
     decision_tree_config = params["train"]["decision_tree"]
+    export_encoder = params["train"]["export_encoder"]
 
     # Spliting train.csv into train and validation dataset
     logger.info("Spliting data into train/val")
@@ -128,80 +113,20 @@ def process_args(args):
 
     # predict
     logger.info("Infering")
-    predict = pipe.predict(x_val)
+    predict = inference(pipe, x_val)
     
     # Evaluation Metrics
     logger.info("Evaluation metrics")
-    # Metric: AUC
-    auc = roc_auc_score(y_val, predict, average="macro")
+    acc, precision, recall, fbeta = compute_model_metrics(y_val, predict)
     
-    # Metric: Accuracy
-    acc = accuracy_score(y_val, predict)
+    logger.info("Accuracy: {}".format(acc))
+    logger.info("Precision: {}".format(precision))
+    logger.info("Recall: {}".format(recall))
+    logger.info("F1: {}".format(fbeta))
 
-    logger.info("AUC: {}".format(auc))
-    logger.info("ACC: {}".format(acc))
-    
-    # Metric: Confusion Matrix
-    # fig_confusion_matrix, ax = plt.subplots(1,1,figsize=(7,4))
-    # ConfusionMatrixDisplay(confusion_matrix(predict,
-    #                                         y_val,
-    #                                         labels=[1,0]),
-    #                        display_labels=[">50k","<=50k"]
-    #                       ).plot(values_format=".0f",ax=ax)
-    # ax.set_xlabel("True Label")
-    # ax.set_ylabel("Predicted Label")
-    
-    # Export if required
-    if export_artifact != "null":
-        # Save the model using joblib
-        joblib.dump(pipe, export_artifact)
+    # save artifacts to disk
+    save_artifact(pipe, export_artifact, le, export_encoder)
 
-def generate_pipeline(x_train, numerical_model, model_config):
-    """
-    Arguments
-    x_train: independent features which need to be transformed
-    numerical_model: parameter of the numerical transformer
-    model_config: configurations of the model
-    """
-
-    # Categrical features to pass down the categorical pipeline 
-    categorical_features = x_train.select_dtypes("object").columns.to_list()
-
-    # Numerical features to pass down the numerical pipeline 
-    numerical_features = x_train.select_dtypes("int64").columns.to_list()
-
-    # Defining the steps in the categorical pipeline 
-    categorical_pipeline = Pipeline(steps = [('cat_selector',FeatureSelector(categorical_features)),
-                                             ('imputer_cat', SimpleImputer(strategy="most_frequent")),
-                                             ('cat_transformer', CategoricalTransformer(colnames=categorical_features)),
-                                             #('cat_encoder','passthrough'
-                                             ('cat_encoder',OneHotEncoder(sparse=False,drop="first"))
-                                            ]
-                                   )
-    
-    # Defining the steps in the numerical pipeline     
-    numerical_pipeline = Pipeline(steps = [('num_selector', FeatureSelector(numerical_features)),
-                                           ('imputer_num', SimpleImputer(strategy="median")),
-                                           ('num_transformer', NumericalTransformer(numerical_model,
-                                                                                   colnames=numerical_features))
-                                          ]
-                                 )
-
-    # Combining numerical and categorical piepline into one full big pipeline horizontally 
-    # using FeatureUnion
-    full_pipeline_preprocessing = FeatureUnion(transformer_list = [('cat_pipeline', categorical_pipeline),
-                                                                   ('num_pipeline', numerical_pipeline)
-                                                                  ]
-                                              )
-
-    # The full pipeline 
-    pipe = Pipeline(steps = [('full_pipeline', full_pipeline_preprocessing),
-                             ("classifier", DecisionTreeClassifier(**model_config))
-                            ]
-                   )
-    return pipe
-        
-    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Train a Decision Tree",

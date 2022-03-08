@@ -35,6 +35,7 @@ stages:
       --param params.yaml
     deps:
     - pipeline/01_data/train_data.csv
+    - pipeline/06_train/helper.py
     - pipeline/06_train/run.py
     - pipeline/06_train/transformer_feature.py
     params:
@@ -43,4 +44,5 @@ stages:
     - main.random_seed
     - train.export_artifact
     outs:
+    - pipeline/01_data/encoder_export
     - pipeline/01_data/model_export

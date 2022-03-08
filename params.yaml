@@ -20,3 +20,4 @@ train:
   numerical_pipe:
     model: 0
   export_artifact: "pipeline/01_data/model_export"
+  export_encoder: "pipeline/01_data/encoder_export"

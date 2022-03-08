@@ -183,7 +183,9 @@ dvc run -n train \
         -d pipeline/01_data/train_data.csv \
         -d pipeline/06_train/run.py \
         -d pipeline/06_train/transformer_feature.py \
+        -d pipeline/06_train/helper.py \
         -o pipeline/01_data/model_export \
+        -o pipeline/01_data/encoder_export \
         python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
                                         --param params.yaml
 

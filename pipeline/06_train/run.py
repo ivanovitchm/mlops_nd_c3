@@ -18,10 +18,8 @@ Try to encapsule the Y in the pipeline
 """
 import argparse
 import logging
-import os
 import yaml
 from yaml import CLoader as Loader
-from sklearn.impute import SimpleImputer
 import joblib
 
 from transformer_feature import FeatureSelector, CategoricalTransformer, NumericalTransformer
@@ -42,6 +40,7 @@ from sklearn.metrics import plot_confusion_matrix
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.impute import SimpleImputer
 
 # configure logging
 logging.basicConfig(level=logging.INFO,
@@ -121,41 +120,7 @@ def process_args(args):
     
     # Pipeline generation
     logger.info("Pipeline generation")
-    
-    # Categrical features to pass down the categorical pipeline 
-    categorical_features = x_train.select_dtypes("object").columns.to_list()
-
-    # Numerical features to pass down the numerical pipeline 
-    numerical_features = x_train.select_dtypes("int64").columns.to_list()
-
-    # Defining the steps in the categorical pipeline 
-    categorical_pipeline = Pipeline(steps = [('cat_selector',FeatureSelector(categorical_features)),
-                                             ('imputer_cat', SimpleImputer(strategy="most_frequent")),
-                                             ('cat_transformer', CategoricalTransformer(colnames=categorical_features)),
-                                             #('cat_encoder','passthrough'
-                                             ('cat_encoder',OneHotEncoder(sparse=False,drop="first"))
-                                            ]
-                                   )
-    # Defining the steps in the numerical pipeline     
-    numerical_pipeline = Pipeline(steps = [('num_selector', FeatureSelector(numerical_features)),
-                                           ('imputer_num', SimpleImputer(strategy="median")),
-                                           ('num_transformer', NumericalTransformer(numerical_model,
-                                                                                   colnames=numerical_features))
-                                          ]
-                                 )
-
-    # Combining numerical and categorical piepline into one full big pipeline horizontally 
-    # using FeatureUnion
-    full_pipeline_preprocessing = FeatureUnion(transformer_list = [('cat_pipeline', categorical_pipeline),
-                                                                   ('num_pipeline', numerical_pipeline)
-                                                                  ]
-                                              )
-   
-    # The full pipeline 
-    pipe = Pipeline(steps = [('full_pipeline', full_pipeline_preprocessing),
-                             ("classifier",DecisionTreeClassifier(**decision_tree_config))
-                            ]
-                   )
+    pipe = generate_pipeline(x_train, numerical_model,decision_tree_config)
 
     # training 
     logger.info("Training")
@@ -190,7 +155,52 @@ def process_args(args):
     if export_artifact != "null":
         # Save the model using joblib
         joblib.dump(pipe, export_artifact)
+
+def generate_pipeline(x_train, numerical_model, model_config):
+    """
+    Arguments
+    x_train: independent features which need to be transformed
+    numerical_model: parameter of the numerical transformer
+    model_config: configurations of the model
+    """
+
+    # Categrical features to pass down the categorical pipeline 
+    categorical_features = x_train.select_dtypes("object").columns.to_list()
+
+    # Numerical features to pass down the numerical pipeline 
+    numerical_features = x_train.select_dtypes("int64").columns.to_list()
+
+    # Defining the steps in the categorical pipeline 
+    categorical_pipeline = Pipeline(steps = [('cat_selector',FeatureSelector(categorical_features)),
+                                             ('imputer_cat', SimpleImputer(strategy="most_frequent")),
+                                             ('cat_transformer', CategoricalTransformer(colnames=categorical_features)),
+                                             #('cat_encoder','passthrough'
+                                             ('cat_encoder',OneHotEncoder(sparse=False,drop="first"))
+                                            ]
+                                   )
     
+    # Defining the steps in the numerical pipeline     
+    numerical_pipeline = Pipeline(steps = [('num_selector', FeatureSelector(numerical_features)),
+                                           ('imputer_num', SimpleImputer(strategy="median")),
+                                           ('num_transformer', NumericalTransformer(numerical_model,
+                                                                                   colnames=numerical_features))
+                                          ]
+                                 )
+
+    # Combining numerical and categorical piepline into one full big pipeline horizontally 
+    # using FeatureUnion
+    full_pipeline_preprocessing = FeatureUnion(transformer_list = [('cat_pipeline', categorical_pipeline),
+                                                                   ('num_pipeline', numerical_pipeline)
+                                                                  ]
+                                              )
+
+    # The full pipeline 
+    pipe = Pipeline(steps = [('full_pipeline', full_pipeline_preprocessing),
+                             ("classifier", DecisionTreeClassifier(**model_config))
+                            ]
+                   )
+    return pipe
+        
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

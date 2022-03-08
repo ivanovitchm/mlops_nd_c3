@@ -17,3 +17,16 @@ stages:
     params:
     - data.ks_alpha
     - data.reference_dataset
+  segregate:
+    cmd: python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv
+      --param params.yaml
+    deps:
+    - pipeline/01_data/preprocessing_data.csv
+    - pipeline/05_segregate/run.py
+    params:
+    - data.stratify
+    - data.test_size
+    - main.random_seed
+    outs:
+    - pipeline/01_data/test_data.csv
+    - pipeline/01_data/train_data.csv

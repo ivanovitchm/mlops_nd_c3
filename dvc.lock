@@ -31,3 +31,25 @@ stages:
       params.yaml:
         data.ks_alpha: 0.05
         data.reference_dataset: pipeline/01_data/preprocessing_data.csv
+  segregate:
+    cmd: python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv
+      --param params.yaml
+    deps:
+    - path: pipeline/01_data/preprocessing_data.csv
+      md5: 4309856f7edb21206b5193724ff484b0
+      size: 3515984
+    - path: pipeline/05_segregate/run.py
+      md5: 351af05afd551525988ebb29d7505762
+      size: 2491
+    params:
+      params.yaml:
+        data.stratify: salary
+        data.test_size: 0.3
+        main.random_seed: 42
+    outs:
+    - path: pipeline/01_data/test_data.csv
+      md5: 63879402361c93a2ef2589ffb0f3f0bc
+      size: 1054435
+    - path: pipeline/01_data/train_data.csv
+      md5: 41bf494a1a72935d10542c743ce8b06a
+      size: 2461705

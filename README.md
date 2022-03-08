@@ -151,8 +151,16 @@ To update the remote repository, please run:
 dvc push --remote s3remote    
 ```
 
+### Segregate
 
 
-
-
-
+```bash
+dvc run -n segregate \
+        -p data.test_size,data.stratify,main.random_seed \
+        -d pipeline/01_data/preprocessing_data.csv \
+        -d pipeline/05_segregate/run.py \
+        -o pipeline/01_data/train_data.csv \
+        -o pipeline/01_data/test_data.csv \
+        python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv \
+                                            --param params.yaml
+```

@@ -114,7 +114,7 @@ git add dvc.yaml pipeline/01_data/.gitignore dvc.lock
 
 If everything is successful, new DVC files and a new artifact are generated in the repository. ``dvc.lock`` and ``dvc.yaml`` are  used to manage the pipeline whereas the clean data, ``preprocessing_data.csv``, must be placed at ``pipeline/01_data``.
 
-Now, given the data and pipeline are up to date is time to update the remote repository, please run:
+Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
 
 ```bash
 dvc push --remote s3remote    
@@ -153,6 +153,7 @@ dvc push --remote s3remote
 
 ### Segregate
 
+This stage of the pipeline splits the dataset into train/test, with the test accounting for 30% of the original dataset. The split is stratified according to the target to keep the same label balance. The test size, stratify column, and random seed used to reproducible issues can be changed in params.yaml file. 
 
 ```bash
 dvc run -n segregate \
@@ -167,6 +168,23 @@ dvc run -n segregate \
 git add dvc.lock pipeline/01_data/.gitignore dvc.yaml
 ```
 
+Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
+
 ```bash
-dvc push --remote s3remote 
+dvc push --remote s3remote    
+```
+
+### Train
+
+
+```bash
+dvc run -n train \
+        -p train.export_artifact,data.val_size,data.stratify,main.random_seed \
+        -d pipeline/01_data/train_data.csv \
+        -d pipeline/06_train/run.py \
+        -o pipeline/01_data/model_export \
+        python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
+                                        --param params.yaml
+
+git add dvc.lock dvc.yaml pipeline/01_data/.gitignore
 ```

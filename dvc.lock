@@ -54,22 +54,4 @@ stages:
       md5: 41bf494a1a72935d10542c743ce8b06a
       size: 2461705
   train:
-    cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
-      --param params.yaml
-    deps:
-    - path: pipeline/01_data/train_data.csv
-      md5: 41bf494a1a72935d10542c743ce8b06a
-      size: 2461705
-    - path: pipeline/06_train/run.py
-      md5: 15e2a15e584667137cd837f760622062
-      size: 11826
-    params:
-      params.yaml:
-        data.stratify: salary
-        data.val_size: 0.3
-        main.random_seed: 42
-        train.export_artifact: pipeline/01_data/model_export
-    outs:
-    - path: pipeline/01_data/model_export
-      md5: 5206e6b51d3753eae8126a6e5e71e39a
-      size: 77456
+    cmd: ' '

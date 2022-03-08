@@ -31,4 +31,15 @@ stages:
     - pipeline/01_data/test_data.csv
     - pipeline/01_data/train_data.csv
   train:
-    cmd: ' '
+    cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
+      --param params.yaml
+    deps:
+    - pipeline/01_data/train_data.csv
+    - pipeline/06_train/run.py
+    params:
+    - data.stratify
+    - data.val_size
+    - main.random_seed
+    - train.export_artifact
+    outs:
+    - pipeline/01_data/model_export

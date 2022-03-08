@@ -163,4 +163,10 @@ dvc run -n segregate \
         -o pipeline/01_data/test_data.csv \
         python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv \
                                             --param params.yaml
+
+git add dvc.lock pipeline/01_data/.gitignore dvc.yaml
+```
+
+```bash
+dvc push --remote s3remote 
 ```

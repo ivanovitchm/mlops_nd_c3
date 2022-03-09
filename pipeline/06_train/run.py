@@ -3,18 +3,6 @@ Creator: Ivanovitch Silva
 Date: 08 Mar. 2022
 Implement a machine pipeline component that
 incorporate preprocessing and train stages.
-
-
-
-Refactoring
-
-Class going to a separate file
-Create a function to create pipeline
-Create function to obtaion evaluaton metrics
-Function to train()?
-Try to encapsule the Y in the pipeline
-
-
 """
 import argparse
 import logging

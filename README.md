@@ -176,6 +176,7 @@ dvc push --remote s3remote
 
 ### Train
 
+This stage of the pipeline works on the training of the model. For the sake of understanding, a simple Decision Tree model was used only for a proof of concept. The focus is on the development of a complete workflow. Hyperparameters are configured using the ``params.yaml`` file. The workflow is based on Scikit-Learn Pipelines. Overall, we have three pipelines, one to process the numerical features and the other to transform categorical features. The third pipeline is used to join previous ones. The final pipeline and encoder used to codify the target variables are saved using joblib library. 
 
 ```bash
 dvc run -n train \
@@ -190,4 +191,10 @@ dvc run -n train \
                                         --param params.yaml
 
 git add dvc.lock dvc.yaml pipeline/01_data/.gitignore
+```
+
+Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
+
+```bash
+dvc push --remote s3remote    
 ```

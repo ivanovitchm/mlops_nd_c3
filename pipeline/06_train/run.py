@@ -14,6 +14,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.preprocessing import LabelEncoder
 from helper import generate_pipeline, inference, compute_model_metrics, save_artifact
+import json 
 
 # configure logging
 logging.basicConfig(level=logging.INFO,
@@ -29,6 +30,7 @@ def process_args(args):
         args - command line arguments
         args.train_data: Fully-qualified name for the training data artifact
         args.param: Yaml file used to store configurable parameters
+        args.score_file: Json file used to store the score results
     """
 
     logger.info("Downloading and reading train artifact")
@@ -111,6 +113,14 @@ def process_args(args):
     logger.info("Precision: {}".format(precision))
     logger.info("Recall: {}".format(recall))
     logger.info("F1: {}".format(fbeta))
+     
+    with open(args.score_file, "w") as fd:
+        json.dump({"accuracy": acc,
+                   "precision": precision,
+                   "recall": recall,
+                   "f1": fbeta},
+                  fd,
+                  indent=4)
 
     # save artifacts to disk
     save_artifact(pipe, export_artifact, le, export_encoder)
@@ -132,6 +142,13 @@ if __name__ == "__main__":
         "--param",
         type=str,
         help="Yaml file used to store configurable parameters",
+        required=True
+    )
+    
+    parser.add_argument(
+        "--score_file",
+        type=str,
+        help="Json file used to store score results",
         required=True
     )
 

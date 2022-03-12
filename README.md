@@ -176,11 +176,12 @@ dvc push --remote s3remote
 
 ### Train
 
-This stage of the pipeline works on the training of the model. For the sake of understanding, a simple Decision Tree model was used only for a proof of concept. The focus is on the development of a complete workflow. Hyperparameters are configured using the ``params.yaml`` file. The workflow is based on Scikit-Learn Pipelines. Overall, we have three pipelines, one to process the numerical features and the other to transform categorical features. The third pipeline is used to join previous ones. The final pipeline and encoder used to codify the target variables are saved using joblib library. 
+This stage of the pipeline works on the training of the model. For the sake of understanding, a simple Decision Tree model was used only for a proof of concept. The focus is on the development of a complete workflow. Hyperparameters are configured using the ``params.yaml`` file. The workflow is based on [Scikit-Learn Pipelines](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html). Overall, we have three pipelines, one to process the numerical features and the other to transform categorical features. The third pipeline is used to join previous ones. The final pipeline and encoder used to codify the target variables are saved using joblib library. 
 
 ```bash
 dvc run -n train \
         -p train.export_artifact,data.val_size,data.stratify,main.random_seed \
+        -M pipeline/01_data/scores.json \
         -d pipeline/01_data/train_data.csv \
         -d pipeline/06_train/run.py \
         -d pipeline/06_train/transformer_feature.py \
@@ -188,7 +189,7 @@ dvc run -n train \
         -o pipeline/01_data/model_export \
         -o pipeline/01_data/encoder_export \
         python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
-                                        --param params.yaml
+                                        --param params.yaml --score_file pipeline/01_data/scores.json
 
 git add dvc.lock dvc.yaml pipeline/01_data/.gitignore
 ```

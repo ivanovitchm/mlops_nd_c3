@@ -32,7 +32,7 @@ stages:
     - pipeline/01_data/train_data.csv
   train:
     cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
-      --param params.yaml
+      --param params.yaml --score_file pipeline/01_data/scores.json
     deps:
     - pipeline/01_data/train_data.csv
     - pipeline/06_train/helper.py
@@ -46,3 +46,6 @@ stages:
     outs:
     - pipeline/01_data/encoder_export
     - pipeline/01_data/model_export
+    metrics:
+    - pipeline/01_data/scores.json:
+        cache: false

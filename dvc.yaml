@@ -31,13 +31,13 @@ stages:
     - pipeline/01_data/test_data.csv
     - pipeline/01_data/train_data.csv
   train:
-    cmd: python pipeline/train/run.py --train_data pipeline/01_data/train_data.csv
+    cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
       --param params.yaml --score_file pipeline/01_data/train_scores.json
     deps:
     - pipeline/01_data/train_data.csv
-    - pipeline/train/helper.py
-    - pipeline/train/run.py
-    - pipeline/train/transformer_feature.py
+    - pipeline/06_train/helper.py
+    - pipeline/06_train/run.py
+    - pipeline/06_train/transformer_feature.py
     params:
     - data.stratify
     - data.val_size

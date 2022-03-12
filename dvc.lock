@@ -55,7 +55,7 @@ stages:
       size: 2461705
   train:
     cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
-      --param params.yaml --score_file pipeline/01_data/scores.json
+      --param params.yaml --score_file pipeline/01_data/train_scores.json
     deps:
     - path: pipeline/01_data/train_data.csv
       md5: 41bf494a1a72935d10542c743ce8b06a
@@ -80,8 +80,8 @@ stages:
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
     - path: pipeline/01_data/model_export
-      md5: d4cf463eb0eaf8dfb9e7f1a93adc6018
-      size: 77467
-    - path: pipeline/01_data/scores.json
-      md5: f308f0aaf711ac693f199fa13e616346
-      size: 137
+      md5: baf60169c41a1782039164129ded8a3b
+      size: 77323
+    - path: pipeline/01_data/train_scores.json
+      md5: 29539bbd0413d11bf8a09ca2f23825c0
+      size: 138

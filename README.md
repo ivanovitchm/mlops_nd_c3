@@ -181,7 +181,7 @@ This stage of the pipeline works on the training of the model. For the sake of u
 ```bash
 dvc run -n train \
         -p train.export_artifact,data.val_size,data.stratify,main.random_seed \
-        -M pipeline/01_data/scores.json \
+        -M pipeline/01_data/train_scores.json \
         -d pipeline/01_data/train_data.csv \
         -d pipeline/06_train/run.py \
         -d pipeline/06_train/transformer_feature.py \
@@ -189,7 +189,7 @@ dvc run -n train \
         -o pipeline/01_data/model_export \
         -o pipeline/01_data/encoder_export \
         python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
-                                        --param params.yaml --score_file pipeline/01_data/scores.json
+                                        --param params.yaml --score_file pipeline/01_data/train_scores.json
 
 git add dvc.lock dvc.yaml pipeline/01_data/.gitignore
 ```

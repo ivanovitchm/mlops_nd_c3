@@ -74,14 +74,14 @@ stages:
         data.stratify: salary
         data.val_size: 0.3
         main.random_seed: 42
-        train.export_artifact: pipeline/01_data/model_export
+        train.export_artifact: pipeline/01_data/model_export.joblib
     outs:
-    - path: pipeline/01_data/encoder_export
+    - path: pipeline/01_data/encoder_export.joblib
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
-    - path: pipeline/01_data/model_export
-      md5: baf60169c41a1782039164129ded8a3b
-      size: 77323
+    - path: pipeline/01_data/model_export.joblib
+      md5: 01f23b8c5f8038eff531588b6cf290c9
+      size: 77467
     - path: pipeline/01_data/train_scores.json
-      md5: 29539bbd0413d11bf8a09ca2f23825c0
+      md5: 22d5ea5945763aa9fac5b722cf4b4aa2
       size: 138

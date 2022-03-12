@@ -44,8 +44,8 @@ stages:
     - main.random_seed
     - train.export_artifact
     outs:
-    - pipeline/01_data/encoder_export
-    - pipeline/01_data/model_export
+    - pipeline/01_data/encoder_export.joblib
+    - pipeline/01_data/model_export.joblib
     metrics:
     - pipeline/01_data/train_scores.json:
         cache: false

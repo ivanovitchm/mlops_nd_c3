@@ -186,16 +186,36 @@ dvc run -n train \
         -d pipeline/06_train/run.py \
         -d pipeline/06_train/transformer_feature.py \
         -d pipeline/06_train/helper.py \
-        -o pipeline/01_data/model_export \
-        -o pipeline/01_data/encoder_export \
+        -o pipeline/01_data/model_export.joblib \
+        -o pipeline/01_data/encoder_export.joblib \
         python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
                                         --param params.yaml --score_file pipeline/01_data/train_scores.json
 
-git add dvc.lock dvc.yaml pipeline/01_data/.gitignore
+git add pipeline/01_data/.gitignore dvc.lock dvc.yaml
 ```
 
 Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
 
 ```bash
 dvc push --remote s3remote    
+```
+
+### Evaluate
+
+In this stage we will build a component that fetches a model and target encoder and test them on the test dataset.
+
+```bash
+dvc run -n evaluate \
+        -M pipeline/01_data/test_scores.json \
+        -d pipeline/01_data/test_data.csv \
+        -d pipeline/07_evaluate/run.py \
+        -d pipeline/07_evaluate/helper.py \
+        -d pipeline/01_data/model_export \
+        -d pipeline/01_data/encoder_export \
+        python pipeline/07_evaluate/run.py --test_data pipeline/01_data/test_data.csv \
+                                        --model pipeline/01_data/model_export \
+                                        --encoder pipeline/01_data/encoder_export \
+                                        --score_file pipeline/01_data/test_scores.json
+
+git add pipeline/01_data/.gitignore dvc.lock dvc.yaml
 ```

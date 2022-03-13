@@ -184,8 +184,6 @@ dvc run -n train \
         -M pipeline/01_data/train_scores.json \
         -d pipeline/01_data/train_data.csv \
         -d pipeline/06_train/run.py \
-        -d pipeline/06_train/transformer_feature.py \
-        -d pipeline/06_train/helper.py \
         -o pipeline/01_data/model_export.joblib \
         -o pipeline/01_data/encoder_export.joblib \
         python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
@@ -210,11 +208,11 @@ dvc run -n evaluate \
         -d pipeline/01_data/test_data.csv \
         -d pipeline/07_evaluate/run.py \
         -d pipeline/07_evaluate/helper.py \
-        -d pipeline/01_data/model_export \
-        -d pipeline/01_data/encoder_export \
+        -d pipeline/01_data/model_export.joblib \
+        -d pipeline/01_data/encoder_export.joblib \
         python pipeline/07_evaluate/run.py --test_data pipeline/01_data/test_data.csv \
-                                        --model pipeline/01_data/model_export \
-                                        --encoder pipeline/01_data/encoder_export \
+                                        --model pipeline/01_data/model_export.joblib \
+                                        --encoder pipeline/01_data/encoder_export.joblib \
                                         --score_file pipeline/01_data/test_scores.json
 
 git add pipeline/01_data/.gitignore dvc.lock dvc.yaml

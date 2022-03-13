@@ -3,5 +3,3 @@
 /preprocessing_data.csv
 /train_data.csv
 /test_data.csv
-/model_export.joblib
-/encoder_export.joblib

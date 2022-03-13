@@ -53,3 +53,53 @@ stages:
     - path: pipeline/01_data/train_data.csv
       md5: 41bf494a1a72935d10542c743ce8b06a
       size: 2461705
+  train:
+    cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
+      --param params.yaml --score_file pipeline/01_data/train_scores.json
+    deps:
+    - path: pipeline/01_data/train_data.csv
+      md5: 41bf494a1a72935d10542c743ce8b06a
+      size: 2461705
+    - path: pipeline/06_train/run.py
+      md5: 72f4a6b9916585a64d886522ec0e921b
+      size: 13727
+    params:
+      params.yaml:
+        data.stratify: salary
+        data.val_size: 0.3
+        main.random_seed: 42
+        train.export_artifact: pipeline/01_data/model_export
+    outs:
+    - path: pipeline/01_data/encoder_export
+      md5: c84ed6bd7e06ea14739c62ef12d16aa8
+      size: 503
+    - path: pipeline/01_data/model_export
+      md5: 7ed21121f6a819dce761041b161c62fb
+      size: 77456
+    - path: pipeline/01_data/train_scores.json
+      md5: 7d57d7f3a57162b0dade2958724f9456
+      size: 139
+  evaluate:
+    cmd: python pipeline/07_evaluate/run.py --test_data pipeline/01_data/test_data.csv
+      --model pipeline/01_data/model_export --encoder pipeline/01_data/encoder_export
+      --score_file pipeline/01_data/test_scores.json
+    deps:
+    - path: pipeline/01_data/encoder_export
+      md5: c84ed6bd7e06ea14739c62ef12d16aa8
+      size: 503
+    - path: pipeline/01_data/model_export
+      md5: 7ed21121f6a819dce761041b161c62fb
+      size: 77456
+    - path: pipeline/01_data/test_data.csv
+      md5: 63879402361c93a2ef2589ffb0f3f0bc
+      size: 1054435
+    - path: pipeline/07_evaluate/helper.py
+      md5: 498ce779292ce8cc3e3a07f968f9fd54
+      size: 5262
+    - path: pipeline/07_evaluate/run.py
+      md5: c1abdacfbcbb8a7709ac5380e6aba8b8
+      size: 2852
+    outs:
+    - path: pipeline/01_data/test_scores.json
+      md5: df324dd4225ce220edeaf11f6d1f72e6
+      size: 139

@@ -8,7 +8,8 @@ import logging
 import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
-from helper import inference, compute_model_metrics
+from helper import inference, compute_model_metrics, FeatureSelector, NumericalTransformer, CategoricalTransformer
+import json
 
 # configure logging
 logging.basicConfig(level=logging.INFO,

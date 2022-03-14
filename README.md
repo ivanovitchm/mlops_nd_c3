@@ -28,7 +28,7 @@ conda env list
 
 We will use DVC to manage and version the data processes that produce our final artifact. This mechanism allows you to organize the project better and reproduce your workflow/pipeline and results more quickly. The following steps are considered: a) ``data``, b) ``eda``, c) ``preprocess``, d) ``check data``, e) ``segregate``, f) ``train`` and g) ``evaluate``.
 
-<center><img width="600" src="https://drive.google.com/uc?export=view&id=1a-nyAPNPiVh-Xb2Pu2t2p-BhSvHJS0pO"></center>
+<center><img width="600" src="images/big_picture.png"></center>
 
 ### Data
 
@@ -218,5 +218,11 @@ dvc run -n evaluate \
                                         --encoder pipeline/data/encoder_export \
                                         --score_file pipeline/data/test_scores.json
 
-git add pipeline/01_data/.gitignore dvc.lock dvc.yaml
+git add dvc.yaml dvc.lock
+```
+
+Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
+
+```bash
+dvc push --remote s3remote    
 ```

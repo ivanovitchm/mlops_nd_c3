@@ -1,0 +1,725 @@
+{
+    "workclass": [
+        {
+            "slice": "Self-emp-inc",
+            "accuracy": 0.728125,
+            "precision": 0.8053691275167785,
+            "recall": 0.6741573033707865,
+            "f1": 0.7339449541284402
+        },
+        {
+            "slice": "Private",
+            "accuracy": 0.8514735920630289,
+            "precision": 0.7424975798644724,
+            "recall": 0.5049374588545096,
+            "f1": 0.6010971786833855
+        },
+        {
+            "slice": "Local-gov",
+            "accuracy": 0.7879746835443038,
+            "precision": 0.6459627329192547,
+            "recall": 0.574585635359116,
+            "f1": 0.6081871345029239
+        },
+        {
+            "slice": "State-gov",
+            "accuracy": 0.8020833333333334,
+            "precision": 0.6213592233009708,
+            "recall": 0.6336633663366337,
+            "f1": 0.6274509803921569
+        },
+        {
+            "slice": "?",
+            "accuracy": 0.9196428571428571,
+            "precision": 0.6363636363636364,
+            "recall": 0.49122807017543857,
+            "f1": 0.5544554455445544
+        },
+        {
+            "slice": "Self-emp-not-inc",
+            "accuracy": 0.7713125845737483,
+            "precision": 0.5981308411214953,
+            "recall": 0.6066350710900474,
+            "f1": 0.6023529411764705
+        },
+        {
+            "slice": "Federal-gov",
+            "accuracy": 0.7201492537313433,
+            "precision": 0.7678571428571429,
+            "recall": 0.4095238095238095,
+            "f1": 0.5341614906832298
+        },
+        {
+            "slice": "Without-pay",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+        },
+        {
+            "slice": "Never-worked",
+            "accuracy": 0.6666666666666666,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0
+        }
+    ],
+    "education": [
+        {
+            "slice": "Some-college",
+            "accuracy": 0.8398560503823662,
+            "precision": 0.7083333333333334,
+            "recall": 0.2793427230046948,
+            "f1": 0.4006734006734006
+        },
+        {
+            "slice": "Bachelors",
+            "accuracy": 0.7029393370856786,
+            "precision": 0.8618181818181818,
+            "recall": 0.3516320474777448,
+            "f1": 0.49947312961011586
+        },
+        {
+            "slice": "HS-grad",
+            "accuracy": 0.8530443098501753,
+            "precision": 0.5822222222222222,
+            "recall": 0.26305220883534136,
+            "f1": 0.3623789764868603
+        },
+        {
+            "slice": "Masters",
+            "accuracy": 0.5882352941176471,
+            "precision": 0.7716535433070866,
+            "recall": 0.3602941176470588,
+            "f1": 0.49122807017543857
+        },
+        {
+            "slice": "11th",
+            "accuracy": 0.936986301369863,
+            "precision": 0.2777777777777778,
+            "recall": 0.3333333333333333,
+            "f1": 0.303030303030303
+        },
+        {
+            "slice": "Assoc-acdm",
+            "accuracy": 0.7603550295857988,
+            "precision": 0.55,
+            "recall": 0.25882352941176473,
+            "f1": 0.3520000000000001
+        },
+        {
+            "slice": "Prof-school",
+            "accuracy": 0.5088757396449705,
+            "precision": 0.9767441860465116,
+            "recall": 0.3387096774193548,
+            "f1": 0.5029940119760479
+        },
+        {
+            "slice": "Doctorate",
+            "accuracy": 0.37398373983739835,
+            "precision": 0.8636363636363636,
+            "recall": 0.20430107526881722,
+            "f1": 0.3304347826086957
+        },
+        {
+            "slice": "Assoc-voc",
+            "accuracy": 0.7649880095923262,
+            "precision": 0.6981132075471698,
+            "recall": 0.31092436974789917,
+            "f1": 0.4302325581395349
+        },
+        {
+            "slice": "7th-8th",
+            "accuracy": 0.8963730569948186,
+            "precision": 0.07142857142857142,
+            "recall": 0.125,
+            "f1": 0.09090909090909091
+        },
+        {
+            "slice": "10th",
+            "accuracy": 0.8740157480314961,
+            "precision": 0.16666666666666666,
+            "recall": 0.25,
+            "f1": 0.2
+        },
+        {
+            "slice": "9th",
+            "accuracy": 0.9212121212121213,
+            "precision": 0.2222222222222222,
+            "recall": 0.25,
+            "f1": 0.23529411764705882
+        },
+        {
+            "slice": "5th-6th",
+            "accuracy": 0.9148936170212766,
+            "precision": 0.2857142857142857,
+            "recall": 0.4,
+            "f1": 0.3333333333333333
+        },
+        {
+            "slice": "1st-4th",
+            "accuracy": 0.9230769230769231,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.33333333333333337
+        },
+        {
+            "slice": "12th",
+            "accuracy": 0.9145299145299145,
+            "precision": 0.25,
+            "recall": 0.125,
+            "f1": 0.16666666666666666
+        },
+        {
+            "slice": "Preschool",
+            "accuracy": 0.9130434782608695,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0
+        }
+    ],
+    "marital_status": [
+        {
+            "slice": "Married-civ-spouse",
+            "accuracy": 0.7232870676360432,
+            "precision": 0.7646657571623465,
+            "recall": 0.5516732283464567,
+            "f1": 0.6409376786735278
+        },
+        {
+            "slice": "Divorced",
+            "accuracy": 0.888641425389755,
+            "precision": 0.46564885496183206,
+            "recall": 0.4326241134751773,
+            "f1": 0.4485294117647059
+        },
+        {
+            "slice": "Never-married",
+            "accuracy": 0.960559796437659,
+            "precision": 0.5217391304347826,
+            "recall": 0.375,
+            "f1": 0.43636363636363634
+        },
+        {
+            "slice": "Widowed",
+            "accuracy": 0.8491803278688524,
+            "precision": 0.17073170731707318,
+            "recall": 0.3684210526315789,
+            "f1": 0.23333333333333336
+        },
+        {
+            "slice": "Married-spouse-absent",
+            "accuracy": 0.847457627118644,
+            "precision": 0.2631578947368421,
+            "recall": 0.5555555555555556,
+            "f1": 0.35714285714285715
+        },
+        {
+            "slice": "Separated",
+            "accuracy": 0.8547854785478548,
+            "precision": 0.2391304347826087,
+            "recall": 0.55,
+            "f1": 0.33333333333333337
+        },
+        {
+            "slice": "Married-AF-spouse",
+            "accuracy": 0.5,
+            "precision": 0.5,
+            "recall": 0.3333333333333333,
+            "f1": 0.4
+        }
+    ],
+    "occupation": [
+        {
+            "slice": "Exec-managerial",
+            "accuracy": 0.7782426778242678,
+            "precision": 0.7624584717607974,
+            "recall": 0.7900172117039587,
+            "f1": 0.7759932375316991
+        },
+        {
+            "slice": "Handlers-cleaners",
+            "accuracy": 0.8973684210526316,
+            "precision": 0.13333333333333333,
+            "recall": 0.23529411764705882,
+            "f1": 0.1702127659574468
+        },
+        {
+            "slice": "Tech-support",
+            "accuracy": 0.7148014440433214,
+            "precision": 0.6081081081081081,
+            "recall": 0.47368421052631576,
+            "f1": 0.5325443786982249
+        },
+        {
+            "slice": "Prof-specialty",
+            "accuracy": 0.7928221859706363,
+            "precision": 0.7513134851138353,
+            "recall": 0.7929759704251387,
+            "f1": 0.7715827338129495
+        },
+        {
+            "slice": "Craft-repair",
+            "accuracy": 0.8118494795836669,
+            "precision": 0.73,
+            "recall": 0.2597864768683274,
+            "f1": 0.3832020997375328
+        },
+        {
+            "slice": "Sales",
+            "accuracy": 0.7871956717763751,
+            "precision": 0.6837209302325581,
+            "recall": 0.4666666666666667,
+            "f1": 0.5547169811320755
+        },
+        {
+            "slice": "Adm-clerical",
+            "accuracy": 0.8531711555169418,
+            "precision": 0.5,
+            "recall": 0.4437869822485207,
+            "f1": 0.47021943573667707
+        },
+        {
+            "slice": "?",
+            "accuracy": 0.9200710479573713,
+            "precision": 0.6363636363636364,
+            "recall": 0.49122807017543857,
+            "f1": 0.5544554455445544
+        },
+        {
+            "slice": "Other-service",
+            "accuracy": 0.9380081300813008,
+            "precision": 0.2,
+            "recall": 0.3225806451612903,
+            "f1": 0.24691358024691357
+        },
+        {
+            "slice": "Machine-op-inspct",
+            "accuracy": 0.8772504091653028,
+            "precision": 0.5,
+            "recall": 0.24,
+            "f1": 0.32432432432432434
+        },
+        {
+            "slice": "Priv-house-serv",
+            "accuracy": 0.9090909090909091,
+            "precision": 0.2,
+            "recall": 1.0,
+            "f1": 0.33333333333333337
+        },
+        {
+            "slice": "Transport-moving",
+            "accuracy": 0.7934560327198364,
+            "precision": 0.4222222222222222,
+            "recall": 0.20212765957446807,
+            "f1": 0.2733812949640288
+        },
+        {
+            "slice": "Protective-serv",
+            "accuracy": 0.6263736263736264,
+            "precision": 0.44642857142857145,
+            "recall": 0.4032258064516129,
+            "f1": 0.42372881355932196
+        },
+        {
+            "slice": "Farming-fishing",
+            "accuracy": 0.8172757475083057,
+            "precision": 0.27450980392156865,
+            "recall": 0.4375,
+            "f1": 0.3373493975903615
+        },
+        {
+            "slice": "Armed-Forces",
+            "accuracy": 0.0,
+            "precision": 1.0,
+            "recall": 0.0,
+            "f1": 0.0
+        }
+    ],
+    "relationship": [
+        {
+            "slice": "Husband",
+            "accuracy": 0.7304609218436874,
+            "precision": 0.7785657998423956,
+            "recall": 0.554122265844083,
+            "f1": 0.6474442988204456
+        },
+        {
+            "slice": "Not-in-family",
+            "accuracy": 0.9140343862455018,
+            "precision": 0.5543478260869565,
+            "recall": 0.4340425531914894,
+            "f1": 0.48687350835322196
+        },
+        {
+            "slice": "Other-relative",
+            "accuracy": 0.9466192170818505,
+            "precision": 0.4375,
+            "recall": 0.5384615384615384,
+            "f1": 0.4827586206896552
+        },
+        {
+            "slice": "Own-child",
+            "accuracy": 0.9845741113346748,
+            "precision": 0.4583333333333333,
+            "recall": 0.5238095238095238,
+            "f1": 0.4888888888888889
+        },
+        {
+            "slice": "Unmarried",
+            "accuracy": 0.93359375,
+            "precision": 0.4444444444444444,
+            "recall": 0.45901639344262296,
+            "f1": 0.4516129032258064
+        },
+        {
+            "slice": "Wife",
+            "accuracy": 0.6723044397463002,
+            "precision": 0.7258064516129032,
+            "recall": 0.5648535564853556,
+            "f1": 0.6352941176470588
+        }
+    ],
+    "race": [
+        {
+            "slice": "White",
+            "accuracy": 0.8336755646817249,
+            "precision": 0.7439104674127716,
+            "recall": 0.5335221907459868,
+            "f1": 0.6213912565301073
+        },
+        {
+            "slice": "Asian-Pac-Islander",
+            "accuracy": 0.7932098765432098,
+            "precision": 0.625,
+            "recall": 0.6593406593406593,
+            "f1": 0.6417112299465241
+        },
+        {
+            "slice": "Other",
+            "accuracy": 0.9431818181818182,
+            "precision": 0.6666666666666666,
+            "recall": 0.8888888888888888,
+            "f1": 0.761904761904762
+        },
+        {
+            "slice": "Black",
+            "accuracy": 0.8904810644831116,
+            "precision": 0.5825242718446602,
+            "recall": 0.4838709677419355,
+            "f1": 0.5286343612334802
+        },
+        {
+            "slice": "Amer-Indian-Eskimo",
+            "accuracy": 0.8829787234042553,
+            "precision": 0.46153846153846156,
+            "recall": 0.6,
+            "f1": 0.5217391304347826
+        }
+    ],
+    "sex": [
+        {
+            "slice": "Male",
+            "accuracy": 0.8077922077922078,
+            "precision": 0.7559943582510579,
+            "recall": 0.5403225806451613,
+            "f1": 0.630217519106408
+        },
+        {
+            "slice": "Female",
+            "accuracy": 0.9064345663661797,
+            "precision": 0.6192170818505338,
+            "recall": 0.47282608695652173,
+            "f1": 0.5362095531587057
+        }
+    ],
+    "native_country": [
+        {
+            "slice": "United-States",
+            "accuracy": 0.8367370353373107,
+            "precision": 0.73767258382643,
+            "recall": 0.5228331780055918,
+            "f1": 0.6119443686937551
+        },
+        {
+            "slice": "Philippines",
+            "accuracy": 0.7205882352941176,
+            "precision": 0.5454545454545454,
+            "recall": 0.8181818181818182,
+            "f1": 0.6545454545454545
+        },
+        {
+            "slice": "Taiwan",
+            "accuracy": 0.6153846153846154,
+            "precision": 0.5,
+            "recall": 0.6,
+            "f1": 0.5454545454545454
+        },
+        {
+            "slice": "Columbia",
+            "accuracy": 0.9166666666666666,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "Germany",
+            "accuracy": 0.7857142857142857,
+            "precision": 0.75,
+            "recall": 0.46153846153846156,
+            "f1": 0.5714285714285714
+        },
+        {
+            "slice": "Jamaica",
+            "accuracy": 0.8928571428571429,
+            "precision": 0.5,
+            "recall": 0.3333333333333333,
+            "f1": 0.4
+        },
+        {
+            "slice": "Japan",
+            "accuracy": 0.75,
+            "precision": 0.7777777777777778,
+            "recall": 0.6363636363636364,
+            "f1": 0.7000000000000001
+        },
+        {
+            "slice": "Haiti",
+            "accuracy": 0.8571428571428571,
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "f1": 0.5
+        },
+        {
+            "slice": "Mexico",
+            "accuracy": 0.9095744680851063,
+            "precision": 0.06666666666666667,
+            "recall": 0.25,
+            "f1": 0.10526315789473685
+        },
+        {
+            "slice": "?",
+            "accuracy": 0.8602150537634409,
+            "precision": 0.7142857142857143,
+            "recall": 0.7446808510638298,
+            "f1": 0.7291666666666666
+        },
+        {
+            "slice": "Italy",
+            "accuracy": 0.7037037037037037,
+            "precision": 0.8,
+            "recall": 0.36363636363636365,
+            "f1": 0.5000000000000001
+        },
+        {
+            "slice": "Canada",
+            "accuracy": 0.8918918918918919,
+            "precision": 0.75,
+            "recall": 0.5,
+            "f1": 0.6
+        },
+        {
+            "slice": "Poland",
+            "accuracy": 0.631578947368421,
+            "precision": 0.375,
+            "recall": 0.6,
+            "f1": 0.4615384615384615
+        },
+        {
+            "slice": "Thailand",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+        },
+        {
+            "slice": "Portugal",
+            "accuracy": 0.625,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "South",
+            "accuracy": 0.7096774193548387,
+            "precision": 0.5,
+            "recall": 0.4444444444444444,
+            "f1": 0.47058823529411764
+        },
+        {
+            "slice": "Vietnam",
+            "accuracy": 0.7272727272727273,
+            "precision": 0.3333333333333333,
+            "recall": 0.5,
+            "f1": 0.4
+        },
+        {
+            "slice": "Ireland",
+            "accuracy": 0.5,
+            "precision": 0.25,
+            "recall": 0.5,
+            "f1": 0.3333333333333333
+        },
+        {
+            "slice": "Nicaragua",
+            "accuracy": 0.8,
+            "precision": 0.25,
+            "recall": 1.0,
+            "f1": 0.4
+        },
+        {
+            "slice": "Hungary",
+            "accuracy": 0.75,
+            "precision": 1.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "Cuba",
+            "accuracy": 0.7931034482758621,
+            "precision": 0.75,
+            "recall": 0.6,
+            "f1": 0.6666666666666665
+        },
+        {
+            "slice": "India",
+            "accuracy": 0.6764705882352942,
+            "precision": 0.5,
+            "recall": 0.45454545454545453,
+            "f1": 0.47619047619047616
+        },
+        {
+            "slice": "Ecuador",
+            "accuracy": 0.5,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "El-Salvador",
+            "accuracy": 0.8611111111111112,
+            "precision": 0.2857142857142857,
+            "recall": 1.0,
+            "f1": 0.4444444444444445
+        },
+        {
+            "slice": "Outlying-US(Guam-USVI-etc)",
+            "accuracy": 0.75,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "France",
+            "accuracy": 0.8333333333333334,
+            "precision": 1.0,
+            "recall": 0.6666666666666666,
+            "f1": 0.8
+        },
+        {
+            "slice": "Trinadad&Tobago",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+        },
+        {
+            "slice": "China",
+            "accuracy": 0.6111111111111112,
+            "precision": 0.2,
+            "recall": 0.25,
+            "f1": 0.22222222222222224
+        },
+        {
+            "slice": "Dominican-Republic",
+            "accuracy": 0.8148148148148148,
+            "precision": 0.2,
+            "recall": 0.5,
+            "f1": 0.28571428571428575
+        },
+        {
+            "slice": "Guatemala",
+            "accuracy": 0.9473684210526315,
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6666666666666666
+        },
+        {
+            "slice": "Puerto-Rico",
+            "accuracy": 0.8857142857142857,
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6666666666666666
+        },
+        {
+            "slice": "Yugoslavia",
+            "accuracy": 0.5,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "England",
+            "accuracy": 0.6086956521739131,
+            "precision": 0.75,
+            "recall": 0.2727272727272727,
+            "f1": 0.39999999999999997
+        },
+        {
+            "slice": "Iran",
+            "accuracy": 0.7142857142857143,
+            "precision": 0.6666666666666666,
+            "recall": 0.4,
+            "f1": 0.5
+        },
+        {
+            "slice": "Peru",
+            "accuracy": 0.6666666666666666,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "Hong",
+            "accuracy": 0.5,
+            "precision": 0.5,
+            "recall": 0.5,
+            "f1": 0.5
+        },
+        {
+            "slice": "Laos",
+            "accuracy": 0.6,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+        },
+        {
+            "slice": "Honduras",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+        },
+        {
+            "slice": "Cambodia",
+            "accuracy": 0.5,
+            "precision": 0.3333333333333333,
+            "recall": 0.5,
+            "f1": 0.4
+        },
+        {
+            "slice": "Scotland",
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+        },
+        {
+            "slice": "Greece",
+            "accuracy": 0.8,
+            "precision": 0.0,
+            "recall": 1.0,
+            "f1": 0.0
+        }
+    ]
+}

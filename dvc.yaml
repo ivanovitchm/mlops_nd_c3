@@ -52,7 +52,7 @@ stages:
   evaluate:
     cmd: python pipeline/evaluate/run.py --test_data pipeline/data/test_data.csv --model
       pipeline/data/model_export --encoder pipeline/data/encoder_export --score_file
-      pipeline/data/test_scores.json
+      pipeline/data/test_scores.json --slice_file pipeline/data/slice_output.json
     deps:
     - pipeline/data/encoder_export
     - pipeline/data/model_export
@@ -60,6 +60,8 @@ stages:
     - pipeline/evaluate/run.py
     - pipeline/train/helper.py
     - pipeline/train/transformer_feature.py
+    outs:
+    - pipeline/data/slice_output.json
     metrics:
     - pipeline/data/test_scores.json:
         cache: false

@@ -213,10 +213,12 @@ dvc run -n evaluate \
         -d pipeline/train/helper.py \
         -d pipeline/train/transformer_feature.py \
         -d pipeline/data/encoder_export \
+        -o pipeline/data/slice_output.json \
         python pipeline/evaluate/run.py --test_data pipeline/data/test_data.csv \
                                         --model pipeline/data/model_export \
                                         --encoder pipeline/data/encoder_export \
-                                        --score_file pipeline/data/test_scores.json
+                                        --score_file pipeline/data/test_scores.json \
+                                        --slice_file pipeline/data/slice_output.json
 
 git add dvc.yaml dvc.lock
 ```

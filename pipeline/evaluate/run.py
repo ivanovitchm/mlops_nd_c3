@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
 import json
+from collections import defaultdict
 import sys
 import pathlib
 import os
@@ -61,6 +62,7 @@ def process_args(args):
     logger.info("Recall: {}".format(recall))
     logger.info("F1: {}".format(fbeta))
      
+    # store all evaluation metrics
     with open(args.score_file, "w") as fd:
         json.dump({"accuracy": acc,
                    "precision": precision,
@@ -68,6 +70,25 @@ def process_args(args):
                    "f1": fbeta},
                   fd,
                   indent=4)
+        
+    # slicing performance    
+    score_dict = defaultdict(list)
+    for feature in x_test.select_dtypes("object").columns:
+        for cardinality in x_test[feature].unique():
+            filter_slice = x_test[feature] == cardinality
+            slice_rows = x_test[filter_slice]
+            slice_target = y_test[filter_slice]
+            predict = inference(pipe, slice_rows)
+            acc, precision, recall, fbeta = compute_model_metrics(slice_target, predict)
+            score_dict[feature].append({"slice": cardinality,
+                                        "accuracy": acc,
+                                        "precision": precision,
+                                        "recall": recall,
+                                        "f1": fbeta
+                                   })
+    # store all slices
+    with open(args.slice_file, "w") as file:
+        json.dump(score_dict, file, indent=4)
 
 
 if __name__ == "__main__":
@@ -101,6 +122,13 @@ if __name__ == "__main__":
         "--score_file",
         type=str,
         help="Json file used to store score results",
+        required=True
+    )
+    
+    parser.add_argument(
+        "--slice_file",
+        type=str,
+        help="Json file used to store slice output",
         required=True
     )
 

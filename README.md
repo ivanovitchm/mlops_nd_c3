@@ -43,8 +43,8 @@ dvc init
 and track and version the file ``census.csv`` using:
 
 ```bash
-dvc add pipeline/01_data/census.csv
-git add pipeline/01_data/.gitignore pipeline/01_data/census.csv.dvc
+dvc add pipeline/data/census.csv
+git add pipeline/data/.gitignore pipeline/01_data/census.csv.dvc
 ```
 
 It is possible tracking data remotely with DVC. In this project we will use a ``S3 bucket`` as configuration. Some aditional steps are necessary to setup the CLI environment. 
@@ -99,11 +99,11 @@ To create pipelines, use ``dvc run`` to create stages. In each stage you can def
 
 ```bash
 dvc run -n preprocess \
-        -d pipeline/03_preprocess/run.py \
-        -d pipeline/01_data/census.csv \
-        -o pipeline/01_data/preprocessing_data.csv \
-        python pipeline/03_preprocess/run.py --input_artifact_name pipeline/01_data/census.csv \
-                                             --output_artifact_name pipeline/01_data/preprocessing_data.csv
+        -d pipeline/preprocess/run.py \
+        -d pipeline/data/census.csv \
+        -o pipeline/data/preprocessing_data.csv \
+        python pipeline/preprocess/run.py --input_artifact_name pipeline/data/census.csv \
+                                             --output_artifact_name pipeline/data/preprocessing_data.csv
 ```
 
 To track the changes with git, run:
@@ -136,10 +136,10 @@ The scope of the ``fixture`` can have a few legal values, described [here](https
 ```bash
 dvc run -n datacheck \
         -p data.reference_dataset,data.ks_alpha \
-        -d pipeline/04_check_data/conftest.py \
-        -d pipeline/04_check_data/test_data.py \
-        -d pipeline/01_data/preprocessing_data.csv \
-        pytest pipeline/04_check_data -s -vv --sample_artifact pipeline/01_data/preprocessing_data.csv \
+        -d pipeline/check_data/conftest.py \
+        -d pipeline/check_data/test_data.py \
+        -d pipeline/data/preprocessing_data.csv \
+        pytest pipeline/check_data -s -vv --sample_artifact pipeline/data/preprocessing_data.csv \
                                              --param params.yaml
                                              
 git add dvc.yaml dvc.lock
@@ -158,14 +158,14 @@ This stage of the pipeline splits the dataset into train/test, with the test acc
 ```bash
 dvc run -n segregate \
         -p data.test_size,data.stratify,main.random_seed \
-        -d pipeline/01_data/preprocessing_data.csv \
-        -d pipeline/05_segregate/run.py \
-        -o pipeline/01_data/train_data.csv \
-        -o pipeline/01_data/test_data.csv \
-        python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv \
+        -d pipeline/data/preprocessing_data.csv \
+        -d pipeline/segregate/run.py \
+        -o pipeline/data/train_data.csv \
+        -o pipeline/data/test_data.csv \
+        python pipeline/segregate/run.py --input_artifact pipeline/data/preprocessing_data.csv \
                                             --param params.yaml
 
-git add dvc.lock pipeline/01_data/.gitignore dvc.yaml
+git add dvc.yaml dvc.lock
 ```
 
 Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
@@ -181,15 +181,17 @@ This stage of the pipeline works on the training of the model. For the sake of u
 ```bash
 dvc run -n train \
         -p train.export_artifact,data.val_size,data.stratify,main.random_seed \
-        -M pipeline/01_data/train_scores.json \
-        -d pipeline/01_data/train_data.csv \
-        -d pipeline/06_train/run.py \
-        -o pipeline/01_data/model_export \
-        -o pipeline/01_data/encoder_export \
-        python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv \
-                                        --param params.yaml --score_file pipeline/01_data/train_scores.json
+        -M pipeline/data/train_scores.json \
+        -d pipeline/data/train_data.csv \
+        -d pipeline/train/run.py \
+        -d pipeline/train/helper.py \
+        -d pipeline/train/transformer_feature.py \
+        -o pipeline/data/model_export \
+        -o pipeline/data/encoder_export \
+        python pipeline/train/run.py --train_data pipeline/data/train_data.csv \
+                                        --param params.yaml --score_file pipeline/data/train_scores.json
 
-git add pipeline/01_data/.gitignore dvc.lock dvc.yaml
+git add dvc.yaml dvc.lock
 ```
 
 Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
@@ -204,16 +206,17 @@ In this stage we will build a component that fetches a model and target encoder 
 
 ```bash
 dvc run -n evaluate \
-        -M pipeline/01_data/test_scores.json \
-        -d pipeline/01_data/test_data.csv \
-        -d pipeline/07_evaluate/run.py \
-        -d pipeline/07_evaluate/helper.py \
-        -d pipeline/01_data/model_export \
-        -d pipeline/01_data/encoder_export \
-        python pipeline/07_evaluate/run.py --test_data pipeline/01_data/test_data.csv \
-                                        --model pipeline/01_data/model_export \
-                                        --encoder pipeline/01_data/encoder_export \
-                                        --score_file pipeline/01_data/test_scores.json
+        -M pipeline/data/test_scores.json \
+        -d pipeline/data/test_data.csv \
+        -d pipeline/evaluate/run.py \
+        -d pipeline/data/model_export \
+        -d pipeline/train/helper.py \
+        -d pipeline/train/transformer_feature.py \
+        -d pipeline/data/encoder_export \
+        python pipeline/evaluate/run.py --test_data pipeline/data/test_data.csv \
+                                        --model pipeline/data/model_export \
+                                        --encoder pipeline/data/encoder_export \
+                                        --score_file pipeline/data/test_scores.json
 
 git add pipeline/01_data/.gitignore dvc.lock dvc.yaml
 ```

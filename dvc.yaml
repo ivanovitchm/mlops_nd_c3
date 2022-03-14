@@ -1,62 +1,65 @@
 stages:
   preprocess:
-    cmd: python pipeline/03_preprocess/run.py --input_artifact_name pipeline/01_data/census.csv
-      --output_artifact_name pipeline/01_data/preprocessing_data.csv
+    cmd: python pipeline/preprocess/run.py --input_artifact_name pipeline/data/census.csv
+      --output_artifact_name pipeline/data/preprocessing_data.csv
     deps:
-    - pipeline/01_data/census.csv
-    - pipeline/03_preprocess/run.py
+    - pipeline/data/census.csv
+    - pipeline/preprocess/run.py
     outs:
-    - pipeline/01_data/preprocessing_data.csv
+    - pipeline/data/preprocessing_data.csv
   datacheck:
-    cmd: pytest pipeline/04_check_data -s -vv --sample_artifact pipeline/01_data/preprocessing_data.csv
+    cmd: pytest pipeline/check_data -s -vv --sample_artifact pipeline/data/preprocessing_data.csv
       --param params.yaml
     deps:
-    - pipeline/01_data/preprocessing_data.csv
-    - pipeline/04_check_data/conftest.py
-    - pipeline/04_check_data/test_data.py
+    - pipeline/check_data/conftest.py
+    - pipeline/check_data/test_data.py
+    - pipeline/data/preprocessing_data.csv
     params:
     - data.ks_alpha
     - data.reference_dataset
   segregate:
-    cmd: python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv
+    cmd: python pipeline/segregate/run.py --input_artifact pipeline/data/preprocessing_data.csv
       --param params.yaml
     deps:
-    - pipeline/01_data/preprocessing_data.csv
-    - pipeline/05_segregate/run.py
+    - pipeline/data/preprocessing_data.csv
+    - pipeline/segregate/run.py
     params:
     - data.stratify
     - data.test_size
     - main.random_seed
     outs:
-    - pipeline/01_data/test_data.csv
-    - pipeline/01_data/train_data.csv
+    - pipeline/data/test_data.csv
+    - pipeline/data/train_data.csv
   train:
-    cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
-      --param params.yaml --score_file pipeline/01_data/train_scores.json
+    cmd: python pipeline/train/run.py --train_data pipeline/data/train_data.csv --param
+      params.yaml --score_file pipeline/data/train_scores.json
     deps:
-    - pipeline/01_data/train_data.csv
-    - pipeline/06_train/run.py
+    - pipeline/data/train_data.csv
+    - pipeline/train/helper.py
+    - pipeline/train/run.py
+    - pipeline/train/transformer_feature.py
     params:
     - data.stratify
     - data.val_size
     - main.random_seed
     - train.export_artifact
     outs:
-    - pipeline/01_data/encoder_export
-    - pipeline/01_data/model_export
+    - pipeline/data/encoder_export
+    - pipeline/data/model_export
     metrics:
-    - pipeline/01_data/train_scores.json:
+    - pipeline/data/train_scores.json:
         cache: false
   evaluate:
-    cmd: python pipeline/07_evaluate/run.py --test_data pipeline/01_data/test_data.csv
-      --model pipeline/01_data/model_export --encoder pipeline/01_data/encoder_export
-      --score_file pipeline/01_data/test_scores.json
+    cmd: python pipeline/evaluate/run.py --test_data pipeline/data/test_data.csv --model
+      pipeline/data/model_export --encoder pipeline/data/encoder_export --score_file
+      pipeline/data/test_scores.json
     deps:
-    - pipeline/01_data/encoder_export
-    - pipeline/01_data/model_export
-    - pipeline/01_data/test_data.csv
-    - pipeline/07_evaluate/helper.py
-    - pipeline/07_evaluate/run.py
+    - pipeline/data/encoder_export
+    - pipeline/data/model_export
+    - pipeline/data/test_data.csv
+    - pipeline/evaluate/run.py
+    - pipeline/train/helper.py
+    - pipeline/train/transformer_feature.py
     metrics:
-    - pipeline/01_data/test_scores.json:
+    - pipeline/data/test_scores.json:
         cache: false

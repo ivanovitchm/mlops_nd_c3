@@ -4,7 +4,7 @@ main:
   # pseudo-random operations
   random_seed: 42
 data:
-  reference_dataset: "pipeline/01_data/preprocessing_data.csv"
+  reference_dataset: "pipeline/data/preprocessing_data.csv"
   # Threshold for Kolomorov-Smirnov test
   ks_alpha: 0.05
   test_size: 0.3
@@ -19,5 +19,5 @@ train:
     max_depth: 13
   numerical_pipe:
     model: 0
-  export_artifact: "pipeline/01_data/model_export"
-  export_encoder: "pipeline/01_data/encoder_export"
+  export_artifact: "pipeline/data/model_export"
+  export_encoder: "pipeline/data/encoder_export"

@@ -1,15 +1,23 @@
 """
 Creator: Ivanovitch Silva
-Date: 12 Mar. 2022
-Test the inference artifact using test dataset and encoder artifact.
+Date: 14 Mar. 2022
+Evaluate the inference model using test dataset and encoder artifact.
 """
 import argparse
 import logging
 import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
-from helper import inference, compute_model_metrics, FeatureSelector, NumericalTransformer, CategoricalTransformer
 import json
+import sys
+import pathlib
+import os
+# append the pipeline folder into the path
+path = os.path.join(pathlib.Path.cwd(),"pipeline")
+sys.path.append(path)
+print(sys.path)
+from train.helper import inference, compute_model_metrics
+from train.transformer_feature import FeatureSelector, NumericalTransformer, CategoricalTransformer
 
 # configure logging
 logging.basicConfig(level=logging.INFO,

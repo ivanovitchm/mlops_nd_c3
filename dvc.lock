@@ -1,105 +1,114 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python pipeline/03_preprocess/run.py --input_artifact_name pipeline/01_data/census.csv
-      --output_artifact_name pipeline/01_data/preprocessing_data.csv
+    cmd: python pipeline/preprocess/run.py --input_artifact_name pipeline/data/census.csv
+      --output_artifact_name pipeline/data/preprocessing_data.csv
     deps:
-    - path: pipeline/01_data/census.csv
+    - path: pipeline/data/census.csv
       md5: 145de00f6e6053d3f7044628f9a5b5ff
       size: 3974474
-    - path: pipeline/03_preprocess/run.py
+    - path: pipeline/preprocess/run.py
       md5: a2a3c2a5f9fbb10025b6c750d042f251
       size: 2448
     outs:
-    - path: pipeline/01_data/preprocessing_data.csv
+    - path: pipeline/data/preprocessing_data.csv
       md5: 4309856f7edb21206b5193724ff484b0
       size: 3515984
   datacheck:
-    cmd: pytest pipeline/04_check_data -s -vv --sample_artifact pipeline/01_data/preprocessing_data.csv
+    cmd: pytest pipeline/check_data -s -vv --sample_artifact pipeline/data/preprocessing_data.csv
       --param params.yaml
     deps:
-    - path: pipeline/01_data/preprocessing_data.csv
-      md5: 4309856f7edb21206b5193724ff484b0
-      size: 3515984
-    - path: pipeline/04_check_data/conftest.py
+    - path: pipeline/check_data/conftest.py
       md5: 94398d0fd7cc4b672c149fa874285921
       size: 1312
-    - path: pipeline/04_check_data/test_data.py
+    - path: pipeline/check_data/test_data.py
       md5: ac83c844dc41b60d20d6cc91c6ef4d92
       size: 4058
+    - path: pipeline/data/preprocessing_data.csv
+      md5: 4309856f7edb21206b5193724ff484b0
+      size: 3515984
     params:
       params.yaml:
         data.ks_alpha: 0.05
-        data.reference_dataset: pipeline/01_data/preprocessing_data.csv
+        data.reference_dataset: pipeline/data/preprocessing_data.csv
   segregate:
-    cmd: python pipeline/05_segregate/run.py --input_artifact pipeline/01_data/preprocessing_data.csv
+    cmd: python pipeline/segregate/run.py --input_artifact pipeline/data/preprocessing_data.csv
       --param params.yaml
     deps:
-    - path: pipeline/01_data/preprocessing_data.csv
+    - path: pipeline/data/preprocessing_data.csv
       md5: 4309856f7edb21206b5193724ff484b0
       size: 3515984
-    - path: pipeline/05_segregate/run.py
-      md5: 351af05afd551525988ebb29d7505762
-      size: 2491
+    - path: pipeline/segregate/run.py
+      md5: fe82a79f188fee88489d08898ab2daca
+      size: 2488
     params:
       params.yaml:
         data.stratify: salary
         data.test_size: 0.3
         main.random_seed: 42
     outs:
-    - path: pipeline/01_data/test_data.csv
+    - path: pipeline/data/test_data.csv
       md5: 63879402361c93a2ef2589ffb0f3f0bc
       size: 1054435
-    - path: pipeline/01_data/train_data.csv
+    - path: pipeline/data/train_data.csv
       md5: 41bf494a1a72935d10542c743ce8b06a
       size: 2461705
   train:
-    cmd: python pipeline/06_train/run.py --train_data pipeline/01_data/train_data.csv
-      --param params.yaml --score_file pipeline/01_data/train_scores.json
+    cmd: python pipeline/train/run.py --train_data pipeline/data/train_data.csv --param
+      params.yaml --score_file pipeline/data/train_scores.json
     deps:
-    - path: pipeline/01_data/train_data.csv
+    - path: pipeline/data/train_data.csv
       md5: 41bf494a1a72935d10542c743ce8b06a
       size: 2461705
-    - path: pipeline/06_train/run.py
-      md5: 72f4a6b9916585a64d886522ec0e921b
-      size: 13727
+    - path: pipeline/train/helper.py
+      md5: e0d03a292e39fb0333acdbafbbcb182e
+      size: 4574
+    - path: pipeline/train/run.py
+      md5: 662fa923b1f36087948126287261aa7b
+      size: 5151
+    - path: pipeline/train/transformer_feature.py
+      md5: 0f343fbff734c59be52a8978d5e30761
+      size: 4364
     params:
       params.yaml:
         data.stratify: salary
         data.val_size: 0.3
         main.random_seed: 42
-        train.export_artifact: pipeline/01_data/model_export
+        train.export_artifact: pipeline/data/model_export
     outs:
-    - path: pipeline/01_data/encoder_export
+    - path: pipeline/data/encoder_export
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
-    - path: pipeline/01_data/model_export
-      md5: 7ed21121f6a819dce761041b161c62fb
-      size: 77456
-    - path: pipeline/01_data/train_scores.json
-      md5: 7d57d7f3a57162b0dade2958724f9456
+    - path: pipeline/data/model_export
+      md5: b89f88fc5ac36c3d57cfebebcf504275
+      size: 77329
+    - path: pipeline/data/train_scores.json
+      md5: 872c7f17fa299ac7e840e5733b9747de
       size: 139
   evaluate:
-    cmd: python pipeline/07_evaluate/run.py --test_data pipeline/01_data/test_data.csv
-      --model pipeline/01_data/model_export --encoder pipeline/01_data/encoder_export
-      --score_file pipeline/01_data/test_scores.json
+    cmd: python pipeline/evaluate/run.py --test_data pipeline/data/test_data.csv --model
+      pipeline/data/model_export --encoder pipeline/data/encoder_export --score_file
+      pipeline/data/test_scores.json
     deps:
-    - path: pipeline/01_data/encoder_export
+    - path: pipeline/data/encoder_export
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
-    - path: pipeline/01_data/model_export
-      md5: 7ed21121f6a819dce761041b161c62fb
-      size: 77456
-    - path: pipeline/01_data/test_data.csv
+    - path: pipeline/data/model_export
+      md5: b89f88fc5ac36c3d57cfebebcf504275
+      size: 77329
+    - path: pipeline/data/test_data.csv
       md5: 63879402361c93a2ef2589ffb0f3f0bc
       size: 1054435
-    - path: pipeline/07_evaluate/helper.py
-      md5: 498ce779292ce8cc3e3a07f968f9fd54
-      size: 5262
-    - path: pipeline/07_evaluate/run.py
-      md5: c1abdacfbcbb8a7709ac5380e6aba8b8
-      size: 2852
+    - path: pipeline/evaluate/run.py
+      md5: 6e916e0e88cd2f5c05d5703f89bb60d6
+      size: 3064
+    - path: pipeline/train/helper.py
+      md5: e0d03a292e39fb0333acdbafbbcb182e
+      size: 4574
+    - path: pipeline/train/transformer_feature.py
+      md5: 0f343fbff734c59be52a8978d5e30761
+      size: 4364
     outs:
-    - path: pipeline/01_data/test_scores.json
-      md5: df324dd4225ce220edeaf11f6d1f72e6
-      size: 139
+    - path: pipeline/data/test_scores.json
+      md5: 80f218c728b63f57f0c64000b3c5376b
+      size: 138

@@ -58,7 +58,7 @@ def process_args(args):
         artifact_name = f"{split}_data.csv"
 
         # Get the path on disk 
-        temp_path = os.path.join("pipeline/01_data", artifact_name)
+        temp_path = os.path.join("pipeline/data", artifact_name)
 
         logger.info(f"Uploading the {split} dataset to {artifact_name}")
 

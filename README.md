@@ -233,6 +233,7 @@ dvc push --remote s3remote
 
 In this stage we will write some unit tests to evaluate if any ML functions return the expected type.
 
+```bash
 dvc run -n check_model \
         -d pipeline/check_model/conftest.py \
         -d pipeline/check_model/test_model.py \

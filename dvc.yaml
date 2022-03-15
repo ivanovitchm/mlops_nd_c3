@@ -65,3 +65,13 @@ stages:
     metrics:
     - pipeline/data/test_scores.json:
         cache: false
+  check_model:
+    cmd: pytest pipeline/check_model -s -vv --test_data pipeline/data/test_data.csv
+      --model pipeline/data/model_export --encoder pipeline/data/encoder_export
+    deps:
+    - pipeline/check_model/conftest.py
+    - pipeline/check_model/test_model.py
+    - pipeline/data/encoder_export
+    - pipeline/data/model_export
+    - pipeline/data/test_data.csv
+    - pipeline/train/transformer_feature.py

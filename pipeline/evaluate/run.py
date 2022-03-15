@@ -41,7 +41,7 @@ def process_args(args):
     # Extract the encoding of the target variable
     logger.info("Extracting the encoding of the target variable")
     le = joblib.load(args.encoder)
-
+    
     # transform y_train
     y_test = le.transform(y_test)
     logger.info("Classes [0, 1]: {}".format(le.inverse_transform([0, 1])))
@@ -49,13 +49,17 @@ def process_args(args):
     ## Download inference artifact
     logger.info("Downloading and load the exported model")
     pipe = joblib.load(args.model)
-                                    
+                                        
     ## Predict test data
     predict = inference(pipe, x_test)
+    
+    print(type(predict))
 
     # Evaluation Metrics
     logger.info("Evaluation metrics")
     acc, precision, recall, fbeta = compute_model_metrics(y_test, predict)
+    
+    print(type(acc), type(precision), type(recall), type (fbeta))
     
     logger.info("Accuracy: {}".format(acc))
     logger.info("Precision: {}".format(precision))

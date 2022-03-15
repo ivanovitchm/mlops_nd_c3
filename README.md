@@ -26,7 +26,7 @@ conda env list
 
 ## Data Pipeline 
 
-We will use DVC to manage and version the data processes that produce our final artifact. This mechanism allows you to organize the project better and reproduce your workflow/pipeline and results more quickly. The following steps are considered: a) ``data``, b) ``eda``, c) ``preprocess``, d) ``check data``, e) ``segregate``, f) ``train`` and g) ``evaluate``.
+We will use DVC to manage and version the data processes that produce our final artifact. This mechanism allows you to organize the project better and reproduce your workflow/pipeline and results more quickly. The following steps are considered: a) ``data``, b) ``eda``, c) ``preprocess``, d) ``check data``, e) ``segregate``, f) ``train``, g) ``evaluate`` and h) ``check model``.
 
 <center><img width="600" src="images/big_picture.png"></center>
 
@@ -228,3 +228,29 @@ Now, given the data and pipeline are up to date is time to upload local files to
 ```bash
 dvc push --remote s3remote    
 ```
+
+### Check Model
+
+In this stage we will write some unit tests to evaluate if any ML functions return the expected type.
+
+dvc run -n check_model \
+        -d pipeline/check_model/conftest.py \
+        -d pipeline/check_model/test_model.py \
+        -d pipeline/train/transformer_feature.py \
+        -d pipeline/data/test_data.csv \
+        -d pipeline/data/model_export \
+        -d pipeline/data/encoder_export \
+        pytest pipeline/check_model -s -vv --test_data pipeline/data/test_data.csv \
+                                        --model pipeline/data/model_export \
+                                        --encoder pipeline/data/encoder_export 
+
+git add dvc.yaml dvc.lock
+```
+
+Now, given the data and pipeline are up to date is time to upload local files to remote repository, please run:
+
+```bash
+dvc push --remote s3remote    
+```
+
+

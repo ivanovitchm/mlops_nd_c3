@@ -14,7 +14,7 @@ The dataset used in this project is based on individual income in the United Sta
 
 You can download the data from the University of California, Irvine's [website](http://archive.ics.uci.edu/ml/datasets/Adult).
 
-After the EDA stage, it was noted that the training data is imbalanced when considered the target variable and some features (``sex``, ``race`` and ``workclass``. 
+After the EDA stage of the data pipeline, it was noted that the training data is imbalanced when considered the target variable and some features (``sex``, ``race`` and ``workclass``. 
 
 <img width="600" src="../images/gender_race.png"><img width="600" src="../images/gender_workclass.png">
 
@@ -22,7 +22,21 @@ After the EDA stage, it was noted that the training data is imbalanced when cons
 The dataset under study is split into Train and Test during the ``Segregate`` stage of the data pipeline. 70% of the clean data is used to Train and the remaining 30% to Test. Additionally, 30% of the Train data is used for validation purposes (hyperparameter-tuning). This configuration is done in a [yaml file](https://github.com/ivanovitchm/mlops_nd_c3/blob/main/params.yaml).
 
 ## Metrics
-_Please include the metrics used and your model's performance on those metrics._
+In order to follow the performance of machine learning experiments, the project marked certains stage outputs of the data pipeline as metrics. The metrics adopted are: [accuracy](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html), [f1](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score), [precision](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score), [recall](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html#sklearn.metrics.recall_score).
+
+To calculate the evaluations metrics is only necessary to run:
+
+```bash
+dvc metrics show
+```
+
+The follow results will be shown:
+
+ **Path**                        | **Accuracy** | **F1** | **Precision** | **Recall** | 
+---------------------------------|--------------|--------|---------------|------------|
+ pipeline/data/train_scores.json | 0.8315       | 0.5954 | 0.7064        | 0.5145     |  
+ pipeline/data/test_scores.json  | 0.8403       | 0.6151 | 0.7333        | 0.5297     |
+
 
 ## Ethical Considerations
 

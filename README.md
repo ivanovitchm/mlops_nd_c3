@@ -30,6 +30,16 @@ We will use DVC to manage and version the data processes that produce our final 
 
 <center><img width="600" src="images/big_picture.png"></center>
 
+It is possible to generate a big-picture of the data pipeline using the DVC. *After we have create all stages*, please run:
+
+```bash
+dvc dag
+```
+and we can obtain the follow output:
+
+<center><img width="600" src="images/dvc_dag.png"></center>
+
+
 ### Data
 
 It is assumed the data has already been fetched and stored at ``pipeline/01_data``.

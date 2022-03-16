@@ -15,7 +15,7 @@ The dataset used in this project is based on individual income in the United Sta
 You can download the data from the University of California, Irvine's [website](http://archive.ics.uci.edu/ml/datasets/Adult).
 
 <center>
-<img width="600" src="../images/gender_race.png"> <img width="600" src="../images/gender_workclass.png">
+<img width="300" src="../images/gender_race.png"> <img width="300" src="../images/gender_workclass.png">
 </center>
 
 

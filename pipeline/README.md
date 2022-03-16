@@ -40,4 +40,7 @@ The follow results will be shown:
 
 ## Ethical Considerations
 
+We may be tempted to claim that this dataset contains the only attributes capable of predicting someone's income. However, we know that is not true, and we will need to deal with the class imbalances somehow.
+
 ## Caveats and Recommendations
+It should be noted that the model trained in this project was used only for validation of a complete data pipeline. It is notary that some important issues related to dataset imbalances exist, and adequate techniques need to be adopted in order to balance it.

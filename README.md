@@ -37,7 +37,7 @@ dvc dag
 ```
 and we can obtain the follow output:
 
-<center><img width="600" src="images/dvc_dag.png"></center>
+<center><img width="100" src="images/dvc_dag.png"></center>
 
 
 ### Data

@@ -6,7 +6,6 @@ At the end of this stage we will have created a new artifact (preprocessed_data.
 """
 import argparse
 import logging
-import os
 import pandas as pd
 
 # configure logging
@@ -17,6 +16,7 @@ logging.basicConfig(level=logging.INFO,
 # reference for a logging obj
 logger = logging.getLogger()
 
+
 def process_args(args):
     """
     Arguments
@@ -24,26 +24,27 @@ def process_args(args):
         args.input_artifact_name: Fully qualified name for the raw data artifact
         args.output_artifact_name: Name for the clean data artifact that will be created
     """
-        
+
     logger.info("Fetching input data artifact")
     input_artifact = args.input_artifact_name
-    
-    # columns used 
+
+    # columns used
     columns = ['age', 'workclass', 'fnlwgt', 'education', 'education_num',
-           'marital_status', 'occupation', 'relationship', 'race', 
-           'sex','capital_gain', 'capital_loss', 'hours_per_week',
-           'native_country','salary']
-    
+               'marital_status', 'occupation', 'relationship', 'race',
+               'sex', 'capital_gain', 'capital_loss', 'hours_per_week',
+               'native_country', 'salary']
+
     # create a dataframe from the artifact path
     df = pd.read_csv(input_artifact)
     df.columns = columns
-    
+
     # Delete duplicated rows
     logger.info("Dropping duplicates")
     df.drop_duplicates(inplace=True)
-    
+
     # Remove white space in categorical features
-    # Tip: we need guarantee this procedure be also adopted during production stage
+    # Tip: we need guarantee this procedure be also adopted during production
+    # stage
     logger.info("Remove white space in categorical features")
     df_cat = df.select_dtypes(["object"])
     df[df_cat.columns] = df_cat.apply(lambda row: row.str.strip())
@@ -51,8 +52,8 @@ def process_args(args):
     # Generate the clean data artifact. e.g path/preprocessed_data.csv
     logger.info("Generate the clean data artifact")
     out_artifact = args.output_artifact_name
-    df.to_csv(out_artifact,index=False)
-    
+    df.to_csv(out_artifact, index=False)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -68,9 +69,9 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--output_artifact_name", 
-        type=str, 
-        help="Name for the clean data artifact", 
+        "--output_artifact_name",
+        type=str,
+        help="Name for the clean data artifact",
         required=True
     )
 

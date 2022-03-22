@@ -8,6 +8,8 @@ import pandas as pd
 import scipy.stats
 
 # Non Deterministic Test
+
+
 def test_kolmogorov_smirnov(data):
 
     sample1, sample2, ks_alpha = data
@@ -20,7 +22,7 @@ def test_kolmogorov_smirnov(data):
         "capital_loss",
         "hours_per_week"
     ]
-    
+
     # Bonferroni correction for multiple hypothesis testing
     alpha_prime = 1 - (1 - ks_alpha)**(1 / len(numerical_columns))
 
@@ -37,12 +39,15 @@ def test_kolmogorov_smirnov(data):
         # NOTE: as always, the p-value should be interpreted as the probability of
         # obtaining a test statistic (TS) equal or more extreme that the one we got
         # by chance, when the null hypothesis is true. If this probability is not
-        # large enough, this dataset should be looked at carefully, hence we fail
+        # large enough, this dataset should be looked at carefully, hence we
+        # fail
         assert p_value > alpha_prime
-        
+
 # Determinstic Test
+
+
 def test_column_presence_and_type(data):
-    
+
     # Disregard the reference dataset and ks_alpha param
     df, _, _ = data
 
@@ -58,7 +63,7 @@ def test_column_presence_and_type(data):
         "race": pd.api.types.is_object_dtype,
         "sex": pd.api.types.is_object_dtype,
         "capital_gain": pd.api.types.is_int64_dtype,
-        "capital_loss": pd.api.types.is_int64_dtype,  
+        "capital_loss": pd.api.types.is_int64_dtype,
         "hours_per_week": pd.api.types.is_int64_dtype,
         "native_country": pd.api.types.is_object_dtype,
         "salary": pd.api.types.is_object_dtype
@@ -69,11 +74,14 @@ def test_column_presence_and_type(data):
 
     for col_name, format_verification_funct in required_columns.items():
 
-        assert format_verification_funct(df[col_name]), f"Column {col_name} failed test {format_verification_funct}"
+        assert format_verification_funct(
+            df[col_name]), f"Column {col_name} failed test {format_verification_funct}"
 
 # Deterministic Test
+
+
 def test_class_names(data):
-    
+
     # Disregard the reference dataset and ks_alpha param
     df, _, _ = data
 
@@ -84,30 +92,37 @@ def test_class_names(data):
     ]
 
     assert df["salary"].isin(known_classes).all()
-    
+
 # Deterministic Test
+
+
 def test_zero_duplicated_rows(data):
-    
+
     # Disregard the reference dataset and ks_alpha param
     df, _, _ = data
-    
+
     duplicated = df.duplicated().sum()
-    
+
     assert duplicated == 0
-    
+
 # Deterministic Test
+
+
 def test_cardinality(data):
     # Disregard the reference dataset and ks_alpha param
     df, _, _ = data
-    
-    cardinality = df.select_dtypes("object").apply(lambda x: len(x.unique())).to_list()
+
+    cardinality = df.select_dtypes("object").apply(
+        lambda x: len(x.unique())).to_list()
     reference_cardinality = [9, 16, 7, 15, 6, 5, 2, 42, 2]
-    
+
     assert cardinality == reference_cardinality
 
 # Deterministic Test
+
+
 def test_column_ranges(data):
-    
+
     # Disregard the reference dataset and ks_alpha
     df, _, _ = data
 

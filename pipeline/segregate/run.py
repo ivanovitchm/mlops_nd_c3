@@ -19,6 +19,7 @@ logging.basicConfig(level=logging.INFO,
 # reference for a logging obj
 logger = logging.getLogger()
 
+
 def process_args(args):
     """
     Arguments
@@ -30,17 +31,18 @@ def process_args(args):
     input_artifact = args.input_artifact
 
     df = pd.read_csv(input_artifact)
-    
+
     # open and read the yaml file
     with open(args.param, "rb") as yaml_file:
         params = yaml.load(yaml_file, Loader=Loader)
-    
+
     # read all parameters
     test_size = float(params["data"]["test_size"])
     random_state = int(params["main"]["random_seed"])
-    stratify= params["data"]["stratify"]
+    stratify = params["data"]["stratify"]
 
-    # Split first in model_dev/test, then we further divide model_dev in train and validation
+    # Split first in model_dev/test, then we further divide model_dev in train
+    # and validation
     logger.info("Splitting data into train, val and test")
     splits = {}
 
@@ -51,19 +53,20 @@ def process_args(args):
         stratify=df[stratify] if stratify != 'null' else None
     )
 
-    # Save the output artifacts. 
+    # Save the output artifacts.
     for split, df in splits.items():
 
         # Make the artifact name from the name of the split
         artifact_name = f"{split}_data.csv"
 
-        # Get the path on disk 
+        # Get the path on disk
         temp_path = os.path.join("pipeline/data", artifact_name)
 
         logger.info(f"Uploading the {split} dataset to {artifact_name}")
 
         # Save then upload to disk
-        df.to_csv(temp_path,index=False)
+        df.to_csv(temp_path, index=False)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

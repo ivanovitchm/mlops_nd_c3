@@ -45,7 +45,7 @@ jobs:
           # if Python syntax errors or undefined names occur, stop the build process.
           python3.8 -m flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-          python3.8 -m flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          python3.8 -m flake8 . --ignore=E402 --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       
       - name: Pull DVC data
         run:

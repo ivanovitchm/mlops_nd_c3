@@ -50,3 +50,13 @@ jobs:
       - name: Pull DVC data
         run:
           dvc pull -r s3remote
+      
+      - name: Testing data and model
+        run: |
+          # apply deterministic and non-deterministic test to the preprocessing_data.csv
+          pytest pipeline/check_data -s -vv --sample_artifact pipeline/data/preprocessing_data.csv \
+                                             --param params.yaml
+          # unit tests to evaluate if any ML functions return the expected type
+          pytest pipeline/check_model -s -vv --test_data pipeline/data/test_data.csv \
+                                        --model pipeline/data/model_export \
+                                        --encoder pipeline/data/encoder_export

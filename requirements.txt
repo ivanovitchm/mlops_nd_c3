@@ -3,3 +3,4 @@ flake8
 black
 dvc[s3]
 dvc
+pandas

@@ -5,3 +5,6 @@ dvc[s3]
 dvc
 pandas
 scipy
+numpy 
+scikit-learn
+joblib

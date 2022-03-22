@@ -274,10 +274,15 @@ In the context of this project, it was set up a simple workflow from the GitHub 
 
 All Actions are configured into the file ``main_actions.yml``. Details can be found [here](https://github.com/ivanovitchm/mlops_nd_c3/blob/main/.github/workflows/main_actions.yml). 
 - Triggers the workflow: ``on push``
-- The type of runner that the job will run on: ``macos-latest```
+- The type of runner that the job will run on: ``macos-latest``
 - Allow the job access the repository from: ``actions/checkout@v2``
-- Set up DVC in the action using: ``iterative/setup-dvc@v1``
+- Set up DVC actions: ``iterative/setup-dvc@v1``
 - Configure AWS credentials: ``aws-actions/configure-aws-credentials@v1``
     - Note that is necessary to configure the repository secrets: ``settings/secrets/actions``
 - Set up Python version: ``actions/setup-python@v3.0.0``
-- And run diverse commands to install dependencies (VM used by Github Actions), lint (flake8), pytest and download artifacts (dvc pull).
+- And run diverse commands to install dependencies (VM used by Github Actions), lint (flake8), pytest (data and model tests) and download artifacts (dvc pull).
+
+A successful build of the proposed workflow is shown below. It is highlighted the DVC action where it is possible to note all tracked artifacts.
+
+<center><img width="600" src="images/workflow.png"></center>
+

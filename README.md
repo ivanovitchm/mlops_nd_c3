@@ -264,4 +264,20 @@ Now, given the data and pipeline are up to date is time to upload local files to
 dvc push --remote s3remote    
 ```
 
+## GitHub Actions
 
+GitHub Actions is a new way to do continuous integration and continuous deployment right from Git. It comes with a handful of workflows such as running Linter or maybe checking in if there are any flake8 errors. You can configure GitHub Actions to trigger a deployment pipeline on push, giving you a fully automated Continuous Integration pipelines that helps keep your team in sync with the latest features.
+
+In the context of this project, it was set up a simple workflow from the GitHub web interface according to the figure below.
+
+<center><img width="400" src="images/github_actions.png"></center>
+
+All Actions are configured into the file ``main_actions.yml``. Details can be found [here](https://github.com/ivanovitchm/mlops_nd_c3/blob/main/.github/workflows/main_actions.yml). 
+- Triggers the workflow: ``on push``
+- The type of runner that the job will run on: ``macos-latest```
+- Allow the job access the repository from: ``actions/checkout@v2``
+- Set up DVC in the action using: ``iterative/setup-dvc@v1``
+- Configure AWS credentials: ``aws-actions/configure-aws-credentials@v1``
+    - Note that is necessary to configure the repository secrets: ``settings/secrets/actions``
+- Set up Python version: ``actions/setup-python@v3.0.0``
+- And run diverse commands to install dependencies (VM used by Github Actions), lint (flake8), pytest and download artifacts (dvc pull).

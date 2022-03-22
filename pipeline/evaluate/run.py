@@ -7,7 +7,6 @@ Evaluate the inference model using test dataset and encoder artifact.
 import argparse
 import logging
 import pandas as pd
-# import matplotlib.pyplot as plt
 import joblib
 import json
 from collections import defaultdict

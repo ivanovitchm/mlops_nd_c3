@@ -4,3 +4,4 @@ black
 dvc[s3]
 dvc
 pandas
+scipy

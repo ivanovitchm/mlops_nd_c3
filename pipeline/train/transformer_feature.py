@@ -114,9 +114,20 @@ class NumericalTransformer(BaseEstimator, TransformerMixin):
     def __init__(self, model=0, colnames=None):
         self.model = model
         self.colnames = colnames
+        self.scaler = None
 
     # Return self nothing else to do here
+    # Fit is used only to learn statistical about Scalers
     def fit(self, X, y=None):
+        df = pd.DataFrame(X, columns=self.colnames)
+        # minmax
+        if self.model == 0:
+            self.scaler = MinMaxScaler()
+            self.scaler.fit(df)
+        # standard scaler
+        elif self.model == 1:
+            self.scaler = StandardScaler()
+            self.scaler.fit(df)
         return self
 
     # return columns names after transformation
@@ -124,6 +135,7 @@ class NumericalTransformer(BaseEstimator, TransformerMixin):
         return self.colnames
 
     # Transformer method we wrote for this transformer
+    # Use fitted scalers
     def transform(self, X, y=None):
         df = pd.DataFrame(X, columns=self.colnames)
 
@@ -132,13 +144,11 @@ class NumericalTransformer(BaseEstimator, TransformerMixin):
 
         # minmax
         if self.model == 0:
-            scaler = MinMaxScaler()
             # transform data
-            df = scaler.fit_transform(df)
+            df = self.scaler.transform(df)
         elif self.model == 1:
-            scaler = StandardScaler()
             # transform data
-            df = scaler.fit_transform(df)
+            df = self.scaler.transform(df)
         else:
             df = df.values
 

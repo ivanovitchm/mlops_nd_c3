@@ -46,19 +46,19 @@ def test_get_inference_low_income():
 def test_get_inference_high_income():
     
     person = {
-        "age": 61,
-        "workclass": 'Local-gov',
-        "fnlwgt": 144723,
-        "education": 'Masters',
-        "education_num": 14,
-        "marital_status": 'Married-civ-spouse',
-        "occupation": 'Exec-managerial',
-        "relationship": 'Husband',
+        "age": 46,
+        "workclass": 'Private',
+        "fnlwgt": 364548,
+        "education": 'Bachelors',
+        "education_num": 13,
+        "marital_status": 'Divorced',
+        "occupation": 'Sales',
+        "relationship": 'Not-in-family',
         "race": 'White',
         "sex": 'Male',
-        "capital_gain": 7298,
+        "capital_gain": 8614,
         "capital_loss": 0,
-        "hours_per_week": 60,
+        "hours_per_week": 40,
         "native_country": 'United-States'
     }
     

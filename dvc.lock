@@ -61,14 +61,14 @@ stages:
       md5: 41bf494a1a72935d10542c743ce8b06a
       size: 2461705
     - path: pipeline/train/helper.py
-      md5: 26857807f847532db35c6e4595aba106
-      size: 4338
+      md5: 18670b995dd6861e998f045885d2ba93
+      size: 4400
     - path: pipeline/train/run.py
-      md5: 908a72386810dcc1a58f7c0af6a48e6d
-      size: 5134
+      md5: 11a247c22e8a40fe882b875c8c2953b1
+      size: 5136
     - path: pipeline/train/transformer_feature.py
-      md5: 1017f38d013bb96012a7baf51c819086
-      size: 4554
+      md5: 9737967123e649edc2e7cf5fedfc2294
+      size: 4934
     params:
       params.yaml:
         data.stratify: salary
@@ -80,10 +80,10 @@ stages:
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
     - path: pipeline/data/model_export
-      md5: ce1ea983c2fca7bcc30fa309d2bccff2
-      size: 7056714
+      md5: b8f59c9da3b7266271b89ab7e3f678f4
+      size: 7057678
     - path: pipeline/data/train_scores.json
-      md5: a57dcbc52bb7f247aa3db32c572a6915
+      md5: 5f13d837ed8398d8b917d3008a26f0f0
       size: 139
   evaluate:
     cmd: python pipeline/evaluate/run.py --test_data pipeline/data/test_data.csv --model
@@ -94,27 +94,27 @@ stages:
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
     - path: pipeline/data/model_export
-      md5: ce1ea983c2fca7bcc30fa309d2bccff2
-      size: 7056714
+      md5: b8f59c9da3b7266271b89ab7e3f678f4
+      size: 7057678
     - path: pipeline/data/test_data.csv
       md5: 63879402361c93a2ef2589ffb0f3f0bc
       size: 1054435
     - path: pipeline/evaluate/run.py
-      md5: 97195013a5597e19c7ee8652dc3610be
-      size: 4210
+      md5: c5a5cfd3be79d3913d91ac7a937936a0
+      size: 4234
     - path: pipeline/train/helper.py
-      md5: 26857807f847532db35c6e4595aba106
-      size: 4338
+      md5: 18670b995dd6861e998f045885d2ba93
+      size: 4400
     - path: pipeline/train/transformer_feature.py
-      md5: 1017f38d013bb96012a7baf51c819086
-      size: 4554
+      md5: 9737967123e649edc2e7cf5fedfc2294
+      size: 4934
     outs:
     - path: pipeline/data/slice_output.json
-      md5: ba8f96bb942d05e71d0a96306e834efa
-      size: 20616
+      md5: 60821caee5c169094bdf2130455789cd
+      size: 20428
     - path: pipeline/data/test_scores.json
-      md5: 25f92ac503247188494efeea1d520581
-      size: 137
+      md5: 65dc5ce17b819ba6aad65f00802e4da1
+      size: 139
   check_model:
     cmd: pytest pipeline/check_model -s -vv --test_data pipeline/data/test_data.csv
       --model pipeline/data/model_export --encoder pipeline/data/encoder_export
@@ -129,11 +129,11 @@ stages:
       md5: c84ed6bd7e06ea14739c62ef12d16aa8
       size: 503
     - path: pipeline/data/model_export
-      md5: ce1ea983c2fca7bcc30fa309d2bccff2
-      size: 7056714
+      md5: b8f59c9da3b7266271b89ab7e3f678f4
+      size: 7057678
     - path: pipeline/data/test_data.csv
       md5: 63879402361c93a2ef2589ffb0f3f0bc
       size: 1054435
     - path: pipeline/train/transformer_feature.py
-      md5: 1017f38d013bb96012a7baf51c819086
-      size: 4554
+      md5: 9737967123e649edc2e7cf5fedfc2294
+      size: 4934

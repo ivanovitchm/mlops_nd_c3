@@ -292,6 +292,30 @@ A successful build of the proposed workflow is shown below. It is highlighted th
 
 ### API Creation
 
+It was created and implemented a RESTful API using FastAPI containing the following features:
+
+- Pydantic body with all columns and hints of an instance. 
+- A ``schema extra`` describing an typical example of an instance according FastAPI [documentation](https://fastapi.tiangolo.com/tutorial/schema-extra-example/).
+- GET on the root giving a welcome message.
+- POST on the predict in order to proceed model inference. 
+- Three unit test to test the API, one for the GET adn two for POST (high income >50k and low income <=50k)
+
+The API is implemented in the ``api/main.py`` whereas tests are on ``api/test_main.py``.
+
+For the sake of understanding and during the development, the API was constanly tested using:
+
+```bash
+uvicorn api.main:app --reload
+```
+
+and this addressing:
+
+```bash
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/docs
+```
+
+
 
 
 ### API Deployment

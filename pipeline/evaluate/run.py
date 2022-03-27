@@ -54,6 +54,7 @@ def process_args(args):
     predict = inference(pipe, x_test)
 
     print(type(predict))
+    print(sum(predict))
 
     # Evaluation Metrics
     logger.info("Evaluation metrics")

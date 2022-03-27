@@ -8,6 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import fbeta_score, precision_score, recall_score, accuracy_score
 import joblib

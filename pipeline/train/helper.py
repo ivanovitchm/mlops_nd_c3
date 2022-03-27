@@ -7,6 +7,7 @@ computer metrics and perform inference
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.tree import DecisionTreeClassifier
+from xgboost import XGBClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import fbeta_score, precision_score, recall_score, accuracy_score
 import joblib
@@ -67,7 +68,7 @@ def generate_pipeline(x_train, numerical_model, model_config):
             ('full_pipeline',
              full_pipeline_preprocessing),
             ("classifier",
-             DecisionTreeClassifier(
+             XGBClassifier(
                  **model_config))])
     return pipe
 

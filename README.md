@@ -286,3 +286,18 @@ A successful build of the proposed workflow is shown below. It is highlighted th
 
 <center><img width="600" src="images/workflow.png"></center>
 
+## API Deployment with FastAPI
+
+[FastAPI](https://fastapi.tiangolo.com/) is a modern API framework that allows you to write code quickly without sacrificing flexibility or extensibility. FastAPI will be used in this project in order to conclude the CI/CD stages. After we build our API locally and test it, we will deploy it to [Heroku](https://www.heroku.com/) and test it again once live.
+
+### API Creation
+
+
+
+### API Deployment
+
+Set up DVC on Heroku using the instructions contained in the starter directory.
+Set up access to AWS on Heroku, if using the CLI: heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy
+
+
+

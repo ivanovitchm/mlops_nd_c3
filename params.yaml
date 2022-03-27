@@ -17,6 +17,11 @@ train:
     criterion: "entropy"
     splitter: "best"
     max_depth: 13
+  xgboost:
+    n_estimators: 400
+    max_depth: 15
+    learning_rate: 0.1
+    subsample: 0.3
   numerical_pipe:
     model: 0
   export_artifact: "pipeline/data/model_export"

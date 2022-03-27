@@ -47,7 +47,8 @@ def process_args(args):
     stratify = params["data"]["stratify"]
     export_artifact = params["train"]["export_artifact"]
     numerical_model = params["train"]["numerical_pipe"]["model"]
-    decision_tree_config = params["train"]["decision_tree"]
+    #decision_tree_config = params["train"]["decision_tree"]
+    xgboost_config = params["train"]["xgboost"]
     export_encoder = params["train"]["export_encoder"]
 
     # Spliting train.csv into train and validation dataset
@@ -97,7 +98,7 @@ def process_args(args):
 
     # Pipeline generation
     logger.info("Pipeline generation")
-    pipe = generate_pipeline(x_train, numerical_model, decision_tree_config)
+    pipe = generate_pipeline(x_train, numerical_model, xgboost_config)
 
     # training
     logger.info("Training")

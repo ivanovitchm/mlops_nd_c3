@@ -34,8 +34,8 @@ The follow results will be shown:
 
  **Path**                        | **Accuracy** | **F1** | **Precision** | **Recall** | 
 ---------------------------------|--------------|--------|---------------|------------|
- pipeline/data/train_scores.json | 0.8315       | 0.5954 | 0.7064        | 0.5145     |  
- pipeline/data/test_scores.json  | 0.8403       | 0.6151 | 0.7333        | 0.5297     |
+ pipeline/data/train_scores.json | 0.8348       | 0.6221 | 0.6911        | 0.5656     |  
+ pipeline/data/test_scores.json  | 0.8392       | 0.6314 | 0.7055        | 0.5714     |
 
 
 ## Ethical Considerations

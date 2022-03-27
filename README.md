@@ -317,7 +317,7 @@ http://127.0.0.1:8000/docs
 
 The screenshot below show a view of the API docs.
 
-<center><img width="600" src="images/docs.png"></center>
+<center><img width="800" src="images/docs.png"></center>
 
 
 For test the API, please run:
@@ -326,7 +326,7 @@ For test the API, please run:
 pytest api/test_main.py -vv
 ```
 
-<center><img width="600" src="images/test_api.png"></center>
+<center><img width="800" src="images/test_api.png"></center>
 
 
 

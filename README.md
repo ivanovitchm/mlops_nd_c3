@@ -388,4 +388,16 @@ heroku run bash --app income-census-project
 
 <center><img width="800" src="images/ok.png"></center>
 
+14. At the end, we can run a query live API from:
+
+```bash
+python api/query_live_api.py 
+```
+
+The result of this run can be better visualized in the figure below. 
+
+<center><img width="800" src="images/query_live.png"></center>
+
+
+
 

@@ -65,3 +65,7 @@ jobs:
           pytest pipeline/check_model -s -vv --test_data pipeline/data/test_data.csv \
                                         --model pipeline/data/model_export \
                                         --encoder pipeline/data/encoder_export
+                                        
+      - name: Testing API
+        run: |
+          pytest api/test_main.py -vv

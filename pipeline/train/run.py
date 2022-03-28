@@ -47,7 +47,7 @@ def process_args(args):
     stratify = params["data"]["stratify"]
     export_artifact = params["train"]["export_artifact"]
     numerical_model = params["train"]["numerical_pipe"]["model"]
-    ## decision_tree_config = params["train"]["decision_tree"]
+    # decision_tree_config = params["train"]["decision_tree"]
     xgboost_config = params["train"]["xgboost"]
     export_encoder = params["train"]["export_encoder"]
 

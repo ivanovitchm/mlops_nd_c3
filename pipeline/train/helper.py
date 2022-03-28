@@ -4,11 +4,12 @@ Date: 14 Mar. 2022
 Functions used to create the pipeline, save artifacts,
 computer metrics and perform inference
 """
+from train.transformer_feature import FeatureSelector, CategoricalTransformer, NumericalTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline, FeatureUnion
-from sklearn.tree import DecisionTreeClassifier
+# from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
-from sklearn.preprocessing import StandardScaler,MinMaxScaler
+# from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import fbeta_score, precision_score, recall_score, accuracy_score
 import joblib
@@ -18,7 +19,6 @@ import sys
 # append the pipeline folder into the path
 path = os.path.join(pathlib.Path.cwd(), "pipeline")
 sys.path.append(path)
-from train.transformer_feature import FeatureSelector, CategoricalTransformer, NumericalTransformer
 
 
 def generate_pipeline(x_train, numerical_model, model_config):

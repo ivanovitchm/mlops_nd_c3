@@ -336,7 +336,7 @@ pytest api/test_main.py -vv
 
 <center><img width="800" src="images/heroku_app.png"></center>
 
-2. Install the Heroku CLI following the [instructions](instructions).
+2. Install the Heroku CLI following the [instructions](https://devcenter.heroku.com/articles/heroku-cli).
 3. In the root folder of the project, check the heroku projects already created.
 ```bash
 heroku apps
@@ -349,21 +349,18 @@ heroku buildpacks --app income-census-project
 ```bash
 heroku buildpacks:set heroku/python --app income-census-project
 ```
-
-
-Set up DVC on Heroku using the instructions contained in the starter directory.
-Set up access to AWS on Heroku, if using the CLI: heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy
-
-We need to give Heroku the ability to pull in data from DVC upon app start up. We will install a [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt) that allows the installation of apt-files and then define the Aptfile that contains a path to DVC. I.e., in the CLI run:
+6. Set up access to AWS on Heroku, if using the CLI: 
+```bash
+heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy --app income-census-project
+```
+7. We need to give Heroku the ability to pull in data from DVC upon app start up. We will install a [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt) that allows the installation of apt-files and then define the Aptfile that contains a path to DVC. I.e., in the CLI run:
 
 ```bash
-heroku buildpacks:add --index 1 heroku-community/apt
+heroku buildpacks:add --index 1 heroku-community/apt --app income-census-project
 ```
-
-Then in your root project folder create a file called ``Aptfile`` that specifies the release of DVC you want installed, e.g.
+8. Then in your root project folder create a file called ``Aptfile`` that specifies the release of DVC you want installed, e.g.
 https://github.com/iterative/dvc/releases/download/2.0.18/dvc_2.0.18_amd64.deb
- 
-Add the following code block to your main.py:
+9. Add the following code block to your main.py:
 
 ```python
 import os
@@ -373,4 +370,17 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
     if os.system("dvc pull") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
+```
+
+10. Configure the remote repository for Heroku:
+```bash
+heroku git:remote --app income-census-project
+```
+11. Push all files to remote repository in Heroku. The command below will install all packages indicated in ``requirements.txt`` in Heroku VM. Note the free tier support until 500 MB. 
+```bash
+git push heroku main
+```
+12. Check the remote files run:
+```bash
+heroku run bash --app income-census-project
 ```

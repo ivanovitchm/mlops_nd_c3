@@ -9,3 +9,6 @@ numpy
 scikit-learn
 joblib
 xgboost
+uvicorn
+fastapi
+pydantic

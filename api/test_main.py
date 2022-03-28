@@ -3,6 +3,7 @@ Creator: Ivanovitch Silva
 Date: 27 Mar. 2022
 Test API
 """
+from api.main import app
 from fastapi.testclient import TestClient
 import os
 import sys
@@ -10,17 +11,18 @@ import pathlib
 # append the folder into the path
 path = os.path.join(pathlib.Path.cwd(), "")
 sys.path.append(path)
-from api.main import app
 
 # Instantiate the testing client with our app.
 client = TestClient(app)
+
 
 def test_root():
     r = client.get("/")
     assert r.status_code == 200
 
+
 def test_get_inference_low_income():
-    
+
     person = {
         "age": 72,
         "workclass": 'Self-emp-inc',
@@ -37,14 +39,15 @@ def test_get_inference_low_income():
         "hours_per_week": 25,
         "native_country": 'United-States'
     }
-    
+
     r = client.post("/predict", json=person)
     print(r.json())
     assert r.status_code == 200
     assert r.json() == "low income <=50K"
 
+
 def test_get_inference_high_income():
-    
+
     person = {
         "age": 46,
         "workclass": 'Private',
@@ -61,7 +64,7 @@ def test_get_inference_high_income():
         "hours_per_week": 40,
         "native_country": 'United-States'
     }
-    
+
     r = client.post("/predict", json=person)
     print(r.json())
     assert r.status_code == 200

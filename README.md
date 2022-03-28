@@ -39,7 +39,7 @@ and we can obtain the follow output:
 
 <center><img width="1000" src="images/dvc_dags_outs.png"></center>
 
-In interactive dag can be visualize from dagshub: ``https://dagshub.com/ivanovitchm/mlops_nd_c3``
+An interactive dag can be visualized from dagshub: ``https://dagshub.com/ivanovitchm/mlops_nd_c3``
 
 
 ### Data

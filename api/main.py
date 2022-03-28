@@ -7,7 +7,6 @@ Create API
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI
-from pipeline.train.helper import inference
 import pandas as pd
 import joblib
 import sys
@@ -17,6 +16,7 @@ import os
 path = os.path.join(pathlib.Path.cwd(), "")
 sys.path.append(path)
 # print(sys.path)
+from pipeline.train.helper import inference
 
 # import libraries to create and deploy API
 

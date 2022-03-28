@@ -360,7 +360,7 @@ heroku buildpacks:add --index 1 heroku-community/apt --app income-census-project
 ```
 8. Then in your root project folder create a file called ``Aptfile`` that specifies the release of DVC you want installed, e.g.
 https://github.com/iterative/dvc/releases/download/2.0.18/dvc_2.0.18_amd64.deb
-9. Add the following code block to your main.py:
+9. Add the following code block to your ``api/main.py``:
 
 ```python
 import os
@@ -376,7 +376,7 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
 ```bash
 heroku git:remote --app income-census-project
 ```
-11. Push all files to remote repository in Heroku. The command below will install all packages indicated in ``requirements.txt`` in Heroku VM. Note the free tier support a slug until 500 MB. 
+11. Push all files to remote repository in Heroku. The command below will install all packages indicated in ``requirements.txt`` in Heroku VM. Note the free tier support a slug until 500 MB. Our slug size was 488 MB!!!
 ```bash
 git push heroku main
 ```
@@ -384,3 +384,8 @@ git push heroku main
 ```bash
 heroku run bash --app income-census-project
 ```
+13. If all previous steps were done with successful you will see the message below after open: ``https://income-census-project.herokuapp.com/``.
+
+<center><img width="800" src="images/ok.png"></center>
+
+

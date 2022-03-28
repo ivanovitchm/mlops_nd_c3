@@ -398,6 +398,17 @@ The result of this run can be better visualized in the figure below.
 
 <center><img width="800" src="images/query_live.png"></center>
 
+15. In case you prefer, que query live API can be tested using FastAPI docs. In a browser, please run:
+
+```bash
+https://income-census-project.herokuapp.com/docs
+```
+
+Right after, click in ``Try it out``. Note, in this case, that example is different that used in the step 14!!!
+
+<center><img width="800" src="images/query_live_browser.png"></center>
+
+
 
 
 

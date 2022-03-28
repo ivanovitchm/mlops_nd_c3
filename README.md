@@ -332,8 +332,30 @@ pytest api/test_main.py -vv
 
 ### API Deployment
 
+1. The first step is to create an new app in Heroku. It is very important to connect the APP to our Github repository and enable the automatic deploys. The figure below show a screenshot of this configuration.
+
+<center><img width="800" src="images/heroku_app.png"></center>
+
 Set up DVC on Heroku using the instructions contained in the starter directory.
 Set up access to AWS on Heroku, if using the CLI: heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy
 
+We need to give Heroku the ability to pull in data from DVC upon app start up. We will install a [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt) that allows the installation of apt-files and then define the Aptfile that contains a path to DVC. I.e., in the CLI run:
 
+```bash
+heroku buildpacks:add --index 1 heroku-community/apt
+```
 
+Then in your root project folder create a file called ``Aptfile`` that specifies the release of DVC you want installed, e.g.
+https://github.com/iterative/dvc/releases/download/2.0.18/dvc_2.0.18_amd64.deb
+ 
+Add the following code block to your main.py:
+
+```python
+import os
+
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+```

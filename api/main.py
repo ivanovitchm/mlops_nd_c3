@@ -23,6 +23,14 @@ from typing import Union
 # BaseModel from Pydantic is used to define data objects.
 from pydantic import BaseModel
 
+# we need to give Heroku the ability to pull
+# in data from DVC upon app start up
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+
 # create the api
 app = FastAPI()
 

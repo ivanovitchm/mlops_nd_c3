@@ -280,7 +280,7 @@ All Actions are configured into the file ``main_actions.yml``. Details can be fo
 - Configure AWS credentials: ``aws-actions/configure-aws-credentials@v1``
     - Note that is necessary to configure the repository secrets: ``settings/secrets/actions``
 - Set up Python version: ``actions/setup-python@v3.0.0``
-- And run diverse commands to install dependencies (VM used by Github Actions), lint (flake8), pytest (data and model tests) and download artifacts (dvc pull).
+- And run diverse commands to install dependencies (VM used by Github Actions), lint (flake8), pytest (data, model and API tests) and download artifacts (dvc pull).
 
 A successful build of the proposed workflow is shown below. It is highlighted the DVC action where it is possible to note all tracked artifacts.
 
@@ -385,7 +385,6 @@ git push heroku main
 heroku run bash --app income-census-project
 ```
 13. If all previous steps were done with successful you will see the message below after open: ``https://income-census-project.herokuapp.com/``.
-
 
 <center><img width="800" src="images/ok.png"></center>
 

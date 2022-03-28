@@ -332,9 +332,24 @@ pytest api/test_main.py -vv
 
 ### API Deployment
 
-1. The first step is to create an new app in Heroku. It is very important to connect the APP to our Github repository and enable the automatic deploys. The figure below show a screenshot of this configuration.
+1. The first step is to create a new app in [Heroku](https://dashboard.heroku.com/). It is very important to connect the APP to our Github repository and enable the automatic deploys. The figure below show a screenshot of this configuration.
 
 <center><img width="800" src="images/heroku_app.png"></center>
+
+2. Install the Heroku CLI following the [instructions](instructions).
+3. In the root folder of the project, check the heroku projects already created.
+```bash
+heroku apps
+```
+4. Check buildpack is correct: 
+```bash
+heroku buildpacks --app income-census-project
+```
+5. Update the buildpack if necessary:
+```bash
+heroku buildpacks:set heroku/python --app income-census-project
+```
+
 
 Set up DVC on Heroku using the instructions contained in the starter directory.
 Set up access to AWS on Heroku, if using the CLI: heroku config:set AWS_ACCESS_KEY_ID=xxx AWS_SECRET_ACCESS_KEY=yyy

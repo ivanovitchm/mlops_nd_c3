@@ -37,7 +37,7 @@ dvc dag --outs
 ```
 and we can obtain the follow output:
 
-<center><img width="300" src="images/dvc_dags_outs.png"></center>
+<center><img width="1000" src="images/dvc_dags_outs.png"></center>
 
 In interactive dag can be visualize from dagshub: ``https://dagshub.com/ivanovitchm/mlops_nd_c3``
 

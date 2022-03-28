@@ -50,6 +50,11 @@ jobs:
       - name: Pull DVC data
         run:
           dvc pull -r s3remote
+          
+      - name: Build and Install
+        run: |
+          # dependency of xgboost in macos system
+          brew install libomp
       
       - name: Testing data and model
         run: |

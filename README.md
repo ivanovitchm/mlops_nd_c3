@@ -386,6 +386,7 @@ heroku run bash --app income-census-project
 ```
 13. If all previous steps were done with successful you will see the message below after open: ``https://income-census-project.herokuapp.com/``.
 
+
 <center><img width="800" src="images/ok.png"></center>
 
 

@@ -123,7 +123,7 @@ stages:
       md5: 5b0828906c0c5dd462da38375121922c
       size: 1456
     - path: pipeline/check_model/test_model.py
-      md5: eee32bbd520975b2aca4ef3990c000f9
+      md5: cbe1be2b91aa98c0e526da589f0f4857
       size: 961
     - path: pipeline/data/encoder_export
       md5: c84ed6bd7e06ea14739c62ef12d16aa8

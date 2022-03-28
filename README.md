@@ -367,7 +367,7 @@ import os
 
 if "DYNO" in os.environ and os.path.isdir(".dvc"):
     os.system("dvc config core.no_scm true")
-    if os.system("dvc pull") != 0:
+    if os.system("dvc pull -r s3remote") != 0:
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 ```
@@ -376,7 +376,7 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
 ```bash
 heroku git:remote --app income-census-project
 ```
-11. Push all files to remote repository in Heroku. The command below will install all packages indicated in ``requirements.txt`` in Heroku VM. Note the free tier support until 500 MB. 
+11. Push all files to remote repository in Heroku. The command below will install all packages indicated in ``requirements.txt`` in Heroku VM. Note the free tier support a slug until 500 MB. 
 ```bash
 git push heroku main
 ```

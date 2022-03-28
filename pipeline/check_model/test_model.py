@@ -4,7 +4,6 @@ Date: 14 Mar. 2022
 Implementing the test model functions.
 """
 import numpy
-from train.helper import inference  # , compute_model_metrics
 from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
 import sys
@@ -14,6 +13,7 @@ import os
 path = os.path.join(pathlib.Path.cwd(), "pipeline")
 sys.path.append(path)
 print(sys.path)
+from train.helper import inference  # , compute_model_metrics
 
 # Encoder target type is correct?
 

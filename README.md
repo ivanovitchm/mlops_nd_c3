@@ -33,11 +33,11 @@ We will use DVC to manage and version the data processes that produce our final 
 It is possible to generate a big-picture of the data pipeline using the DVC. *After we have create all stages*, please run:
 
 ```bash
-dvc dag
+dvc dag --outs
 ```
 and we can obtain the follow output:
 
-<center><img width="300" src="images/dvc_dag.png"></center>
+<center><img width="300" src="images/dvc_dag_outs.png"></center>
 
 
 ### Data
